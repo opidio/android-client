@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
@@ -13,10 +12,10 @@ import com.google.android.gms.plus.Plus;
 public class WelcomeActivity extends Activity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private static final int RC_SIGN_IN = 0;
-    private boolean mSignInClicked;
-    private ConnectionResult mConnectionResult;
-    private GoogleApiClient mGoogleApiClient;
-    private boolean mIntentInProgress;
+    private boolean signInClicked;
+    private ConnectionResult connectionResult;
+    private GoogleApiClient googleApiClient;
+    private boolean intentInProgress;
 
 
     @Override
@@ -24,9 +23,8 @@ public class WelcomeActivity extends Activity implements View.OnClickListener, G
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(Plus.API)
@@ -39,81 +37,96 @@ public class WelcomeActivity extends Activity implements View.OnClickListener, G
     protected void onStop() {
         super.onStop();
 
-        if (mGoogleApiClient.isConnected()) {
-            mGoogleApiClient.disconnect();
+        if (googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mGoogleApiClient.connect();
+        googleApiClient.connect();
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.sign_in_button
-                && !mGoogleApiClient.isConnecting()) {
-            mSignInClicked = true;
+                && !googleApiClient.isConnecting()) {
+            signInClicked = true;
             resolveSignInError();
-        } else if (view.getId() == R.id.sign_out_button && mGoogleApiClient.isConnected()) {
-            Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
-            mGoogleApiClient.disconnect();
-            mGoogleApiClient.connect();
         }
     }
 
     private void resolveSignInError() {
-        if (mConnectionResult.hasResolution()) {
+        if (connectionResult.hasResolution()) {
             try {
-                mIntentInProgress = true;
-                startIntentSenderForResult(mConnectionResult.getResolution().getIntentSender(),
+                intentInProgress = true;
+                startIntentSenderForResult(connectionResult.getResolution().getIntentSender(),
                         RC_SIGN_IN, null, 0, 0, 0);
             } catch (IntentSender.SendIntentException e) {
                 // The intent was canceled before it was sent.  Return to the default
                 // state and attempt to connect to get an updated ConnectionResult.
-                mIntentInProgress = false;
-                mGoogleApiClient.connect();
+                intentInProgress = false;
+                googleApiClient.connect();
             }
         }
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        if (!mIntentInProgress) {
-            mConnectionResult = result;
+        // Connection failed, either because
+        // a) the user is not logged in (In which case show the login button)
+        // b) the user clicked the login button, but has to select something
+        //    (if so, show the dialog)
+        if (!intentInProgress) {
+            connectionResult = result;
 
-            if (mSignInClicked) {
+            if (signInClicked) {
                 resolveSignInError();
+            } else {
+                toggleLoginButton(true);
             }
         }
     }
 
+    /**
+     * Toggle between loading and showing login button
+     * @param visible  true ? login button shown, loading animation hidden
+     */
+    private void toggleLoginButton(boolean visible) {
+        View loginButton = findViewById(R.id.sign_in_button);
+        View loginSpinner = findViewById(R.id.login_loading_indicator);
+        loginButton.setVisibility(visible ? View.VISIBLE : View.GONE);
+        loginSpinner.setVisibility(visible ? View.GONE : View.VISIBLE);
+    }
+
     @Override
     public void onConnected(Bundle connectionHint) {
-        mSignInClicked = false;
-        Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
+        // User was successfully connected, send the user to the main activity
+        signInClicked = false;
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        toggleLoginButton(false);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
         if (requestCode == RC_SIGN_IN) {
+            // Probably handling a account selector dialog
             if (responseCode != RESULT_OK) {
-                mSignInClicked = false;
+                signInClicked = false;
             }
 
-            mIntentInProgress = false;
+            intentInProgress = false;
 
-            if (!mGoogleApiClient.isConnecting()) {
-                mGoogleApiClient.connect();
+            if (!googleApiClient.isConnecting()) {
+                googleApiClient.connect();
             }
         }
     }
 
     @Override
     public void onConnectionSuspended(int cause) {
-        mGoogleApiClient.connect();
+        googleApiClient.connect();
     }
 }

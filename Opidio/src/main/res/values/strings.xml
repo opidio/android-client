@@ -3,7 +3,6 @@
 
     <string name="app_name">Opidio</string>
     <string name="hello_world">Hello world!</string>
-    <string name="sign_out">Sign out</string>
 	<string name="title_activity_main">MainActivity</string>
 
 	<string name="title_section1">Section 1</string>
