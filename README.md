@@ -7,5 +7,6 @@ The Opidio Projects:
 [![Hub Server](https://img.shields.io/badge/opidio-hub--server-lightgray.svg?style=flat-square)](https://github.com/opidio/hub-server)
 [![Channel Server](https://img.shields.io/badge/opidio-channel--server-lightgray.svg?style=flat-square)](https://github.com/opidio/channel-server)
 [![Android Client](https://img.shields.io/badge/opidio-android--client-blue.svg?style=flat-square)](https://github.com/opidio/android-client)
+[![Landing Page](https://img.shields.io/badge/opidio-landing--page-lightgray.svg?style=flat-square)](https://github.com/opidio/landing-page)
 
 The android client for Opidio
