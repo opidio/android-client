@@ -10,3 +10,12 @@ The Opidio Projects:
 [![Landing Page](https://img.shields.io/badge/opidio-landing--page-lightgray.svg?style=flat-square)](https://github.com/opidio/landing-page)
 
 The android client for Opidio
+
+## Building the app
+The easiest way to build the app is running
+
+  ./gradlew build
+
+Which will place an APK at `./Opidio/build/outputs/apk/Opidio-debug.apk`.
+
+Alternatively, it can be imported into Android Studio and it should build the project structure automatically
