@@ -1,6 +1,7 @@
 package io.opid;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
+import android.widget.Toast;
+
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity
@@ -36,6 +40,17 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        final Context ctx = this;
+        new APIVideoList() {
+            @Override
+            protected void onPostExecute(List<String> gs) {
+                if (gs == null) {
+                    Toast.makeText(ctx, "Could not download video list", Toast.LENGTH_LONG).show();
+                }
+                System.out.println(gs);
+            }
+        }.run();
     }
 
     @Override
