@@ -10,8 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.*;
 import android.widget.Toast;
-
-import java.util.List;
+import io.opid.model.Videos;
 
 
 public class MainActivity extends ActionBarActivity
@@ -42,15 +41,15 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         final Context ctx = this;
-        new APIVideoList() {
+        new JsonDownloader<Videos>(Videos.class) {
             @Override
-            protected void onPostExecute(List<String> gs) {
-                if (gs == null) {
+            protected void onPostExecute(Videos videos) {
+                if (videos == null) {
                     Toast.makeText(ctx, "Could not download video list", Toast.LENGTH_LONG).show();
                 }
-                System.out.println(gs);
+                System.out.println(videos);
             }
-        }.run();
+        }.execute(Config.HUB_SERVER + "/api/videos/");
     }
 
     @Override

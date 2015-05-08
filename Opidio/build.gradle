@@ -1,12 +1,15 @@
+apply plugin: 'com.android.application'
+apply plugin: 'jsonschema2pojo'
+
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.1'
+        classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:latest.integration'
     }
 }
-apply plugin: 'com.android.application'
 
 repositories {
     jcenter()
@@ -29,6 +32,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
 }
 
 dependencies {
@@ -36,4 +44,19 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.android.support:support-v4:22.0.0'
     compile 'com.google.android.gms:play-services:7.0.0'
+    compile 'commons-lang:commons-lang:2.6'
+
+    compile (
+            [group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.4.1'],
+            [group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.4.1'],
+            [group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.4.1']
+    )
+}
+
+jsonSchema2Pojo {
+    source = files("${project.rootDir}/json")
+    targetDirectory = file("${project.rootDir}/build/generated-sources/js2p")
+    sourceType = 'json'
+    annotationStyle = 'jackson2'
+    targetPackage = 'io.opid.model'
 }

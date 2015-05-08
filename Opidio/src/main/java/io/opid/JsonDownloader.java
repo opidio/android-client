@@ -1,8 +1,7 @@
 package io.opid;
 
 import android.os.AsyncTask;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,23 +10,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-public abstract class JsonDownloader<Result> extends AsyncTask<String, Result, Result> {
+public abstract class JsonDownloader<JsonType> extends AsyncTask<String, JsonType, JsonType> {
+    private final Class<JsonType> type;
+
+    public JsonDownloader(Class<JsonType> type) {
+        this.type = type;
+    }
+
     @Override
-    protected Result doInBackground(String... params) {
+    protected JsonType doInBackground(String... params) {
         try {
             String data = downloadData(params[0]);
-            JSONObject obj;
-            obj = new JSONObject(data);
-            return parseJSON(obj);
-        } catch (JSONException e) {
-            e.printStackTrace();
+            return new ObjectMapper().readValue(data, type);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
-
-    protected abstract Result parseJSON(JSONObject obj);
 
     private String downloadData(String urlString) throws IOException {
         URL url;
