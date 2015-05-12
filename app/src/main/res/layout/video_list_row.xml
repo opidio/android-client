@@ -30,4 +30,9 @@
 			android:textColor="#222"
 			android:id="@+id/video_title"/>
 
+	<com.android.volley.toolbox.NetworkImageView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/thumbnail"/>
+
 </RelativeLayout>

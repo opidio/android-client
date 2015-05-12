@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.NetworkImageView;
 import io.opid.model.Video;
 import io.opid.model.Videos;
 
@@ -65,10 +66,12 @@ public class VideoListAdapter extends BaseAdapter {
     private View createView(int position, View view) {
         TextView videoTitle = (TextView) view.findViewById(R.id.video_title);
         TextView channelName = (TextView) view.findViewById(R.id.channel_name);
+        NetworkImageView thumbnail = (NetworkImageView) view.findViewById(R.id.thumbnail);
 
         Video video = videoList.get(position);
         videoTitle.setText(video.getVideo());
         channelName.setText(video.getChannel_name() + "(" + video.getSlug() + ")");
+        thumbnail.setImageUrl(video.getUrl() + "/thumbnail.png", OpidioApplication.getInstance().getImageLoader());
 
         return view;
     }
@@ -104,6 +107,6 @@ public class VideoListAdapter extends BaseAdapter {
     }
 
     private boolean closeToEnd(int position) {
-        return position + 3 > getCount();
+        return position + 7 > getCount();
     }
 }

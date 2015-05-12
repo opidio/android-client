@@ -27,4 +27,11 @@ public class OpidioApplication extends Application {
 
         return requestQueue;
     }
+
+    public ImageLoader getImageLoader() {
+        if (imageLoader == null) {
+            imageLoader = new ImageLoader(getRequestQueue(), new OpidioImageCache());
+        }
+        return imageLoader;
+    }
 }
