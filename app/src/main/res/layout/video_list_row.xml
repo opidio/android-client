@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/channel_name"
+			android:text="Channel Placeholder"
+			android:textSize="19sp"
+			android:textColor="#0000ff"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="uploaded"
+			android:textSize="19sp"
+			android:layout_toRightOf="@id/channel_name"
+			android:layout_toEndOf="@id/channel_name"
+			android:layout_marginLeft="5dp"
+			android:textColor="#777"/>
+
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Video Title Placeholder"
+			android:layout_below="@id/channel_name"
+			android:textSize="15sp"
+			android:textColor="#222"
+			android:id="@+id/video_title"/>
+
+</RelativeLayout>
