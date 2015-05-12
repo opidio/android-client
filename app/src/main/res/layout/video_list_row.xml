@@ -7,6 +7,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:id="@+id/channel_name"
+			android:layout_marginLeft="10dp"
 			android:text="Channel Placeholder"
 			android:textSize="19sp"
 			android:textColor="#0000ff"/>
@@ -25,14 +26,19 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="Video Title Placeholder"
+			android:layout_marginLeft="10dp"
 			android:layout_below="@id/channel_name"
 			android:textSize="15sp"
 			android:textColor="#222"
 			android:id="@+id/video_title"/>
 
-	<com.android.volley.toolbox.NetworkImageView
-			android:layout_width="wrap_content"
+	<io.opid.AspectNetImageView
+			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:id="@+id/thumbnail"/>
+			android:layout_below="@id/video_title"
+			android:id="@+id/thumbnail"
+			android:background="#ff0000"
+			android:layout_margin="5dp"
+			android:scaleType="fitXY"/>
 
 </RelativeLayout>

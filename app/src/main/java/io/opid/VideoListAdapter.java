@@ -70,7 +70,7 @@ public class VideoListAdapter extends BaseAdapter {
 
         Video video = videoList.get(position);
         videoTitle.setText(video.getVideo());
-        channelName.setText(video.getChannel_name() + "(" + video.getSlug() + ")");
+        channelName.setText(video.getChannel_name());
         thumbnail.setImageUrl(video.getUrl() + "/thumbnail.png", OpidioApplication.getInstance().getImageLoader());
 
         return view;
