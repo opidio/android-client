@@ -41,11 +41,12 @@ public class MainActivity extends ActionBarActivity
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
         final Context ctx = this;
+        Toast.makeText(ctx, "Downloading video list", Toast.LENGTH_SHORT).show();
         new JsonDownloader<Videos>(Videos.class) {
             @Override
             protected void onPostExecute(Videos videos) {
                 if (videos == null) {
-                    Toast.makeText(ctx, "Could not download video list", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ctx, "Could not download video list", Toast.LENGTH_SHORT).show();
                 }
                 System.out.println(videos);
             }
