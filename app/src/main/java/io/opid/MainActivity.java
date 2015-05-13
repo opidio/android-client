@@ -35,25 +35,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-      /*  final Context ctx = this;
-        Toast.makeText(ctx, "Downloading video list", Toast.LENGTH_SHORT).show();
-        new JsonDownloader<Videos>(Videos.class) {
-            @Override
-            protected void onPostExecute(Videos videos) {
-                if (videos == null) {
-                    Toast.makeText(ctx, "Could not download video list", Toast.LENGTH_SHORT).show();
-                }
-                displayVideos(videos);
-            }
-        }.execute(Config.HUB_SERVER + "/api/videos/");*/
     }
-/*
-    private void displayVideos(Videos videos) {
-        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, videos.getVideos());
-        ListView listView = (ListView) findViewById(R.id.main_list);
-        listView.setAdapter(adapter);
-    }*/
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
