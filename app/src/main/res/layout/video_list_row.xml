@@ -37,7 +37,7 @@
 			android:layout_height="wrap_content"
 			android:layout_below="@id/video_title"
 			android:id="@+id/thumbnail"
-			android:background="#ff0000"
+			android:background="#ffc5cbd1"
 			android:layout_margin="5dp"
 			android:scaleType="fitXY"/>
 

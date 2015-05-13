@@ -2,6 +2,7 @@ package io.opid;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VideoListAdapter extends BaseAdapter {
+    private final Fragment fragment;
     private List<Video> videoList = new ArrayList<>();
     private Activity activity;
     private LayoutInflater inflater;
@@ -26,8 +28,9 @@ public class VideoListAdapter extends BaseAdapter {
     private int currentPage = 0;
     private int maxPages = 1; // Will be update upon the first request
 
-    public VideoListAdapter(Activity activity) {
+    public VideoListAdapter(Fragment fragment, Activity activity) {
         this.activity = activity;
+        this.fragment = fragment;
         loadMoreData();
     }
 
@@ -77,8 +80,7 @@ public class VideoListAdapter extends BaseAdapter {
     }
 
     private void loadMoreData() {
-        loading = true;
-
+        setLoading(true);
         int page = currentPage + 1;
 
         if (page > maxPages) {
@@ -94,19 +96,28 @@ public class VideoListAdapter extends BaseAdapter {
                         currentPage = response.getPage();
                         maxPages = response.getTotal_pages();
                         notifyDataSetChanged();
-                        loading = false;
+                        setLoading(false);
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(activity, "Could not download videos", Toast.LENGTH_SHORT).show();
-                        loading = false;
+                        setLoading(false);
                     }
                 }));
+    }
+
+    public void setLoading(boolean loading) {
+        this.loading = loading;
+        ((AdapterStatusCahnged) fragment).statusChanged(loading);
     }
 
     private boolean closeToEnd(int position) {
         return position + 7 > getCount();
     }
+
+    public interface AdapterStatusCahnged {
+        public void statusChanged(boolean loading);
+    };
 }
