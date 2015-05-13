@@ -21,5 +21,6 @@
 	<string name="following">Following</string>
 	<string name="my_followers">My Followers</string>
 	<string name="search_users">Search Users</string>
+	<string name="sign_out">Sign Out</string>
 
 </resources>
