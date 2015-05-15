@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     private GoogleApiClient googleApiClient;
 
@@ -36,6 +38,8 @@ public class MainActivity extends ActionBarActivity
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN)
+                .addOnConnectionFailedListener(this)
+                .addConnectionCallbacks(this)
                 .build();
     }
 
@@ -49,6 +53,12 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, VideoListFragment.newInstance(VideoViewType.ACTIONGS_BY_MY_FOLLOWERS))
                     .commit();
             getSupportActionBar().setTitle("Social Activity");
+        } else if (position == 1) {
+            // All Videos
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, VideoListFragment.newInstance(VideoViewType.ACTIONGS_BY_MY_FOLLOWERS))
+                    .commit();
+            getSupportActionBar().setTitle("All Videos");
         } else if(position == 5) {
             // Sign Out
             Plus.AccountApi.clearDefaultAccount(googleApiClient);
@@ -59,4 +69,24 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        startActivity(new Intent(this, WelcomeActivity.class));
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Bundle appActivities = new Bundle();
+        appActivities.putString(GoogleAuthUtil.KEY_REQUEST_VISIBLE_ACTIVITIES, "");
+        String scopes = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
+        new GetTokenTask(this,
+                Plus.AccountApi.getAccountName(googleApiClient),
+                scopes,
+                appActivities).execute();
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        googleApiClient.connect();
+    }
 }
