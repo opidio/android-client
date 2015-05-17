@@ -82,7 +82,6 @@ public class GetTokenTask extends AsyncTask<Void, Void, String> {
                 new Response.Listener<Login>() {
                     @Override
                     public void onResponse(Login response) {
-                        Toast.makeText(mActivity, "Logged in", Toast.LENGTH_SHORT).show();
                         TextView loggedInAs = (TextView) mActivity.findViewById(R.id.logged_in_as);
                         loggedInAs.setText(response.getName());
                     }

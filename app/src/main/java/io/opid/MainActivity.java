@@ -1,6 +1,7 @@
 package io.opid;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -12,7 +13,7 @@ import com.google.android.gms.plus.Plus;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, SearchUserFragment.OnFragmentInteractionListener {
 
     private GoogleApiClient googleApiClient;
 
@@ -52,13 +53,19 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, VideoListFragment.newInstance(VideoViewType.ACTIONGS_BY_MY_FOLLOWERS))
                     .commit();
-            getSupportActionBar().setTitle("Social Activity");
+            getSupportActionBar().setTitle(getString(R.string.social_activity));
         } else if (position == 1) {
             // All Videos
             fragmentManager.beginTransaction()
                     .replace(R.id.container, VideoListFragment.newInstance(VideoViewType.ACTIONGS_BY_MY_FOLLOWERS))
                     .commit();
-            getSupportActionBar().setTitle("All Videos");
+            getSupportActionBar().setTitle(getString(R.string.all_videos));
+        } else if (position == 4) {
+            // Search Users
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, SearchUserFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.all_videos));
         } else if(position == 5) {
             // Sign Out
             Plus.AccountApi.clearDefaultAccount(googleApiClient);
@@ -88,5 +95,10 @@ public class MainActivity extends ActionBarActivity
     @Override
     public void onConnectionSuspended(int i) {
         googleApiClient.connect();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
