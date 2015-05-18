@@ -12,7 +12,7 @@ public class UserSearchResultAdapter extends PaginatedListAdapter<User, Users> {
     private final String query;
 
     public UserSearchResultAdapter(Fragment fragment, Activity activity, String query) {
-        super(Users.class, fragment, activity);
+        super(Users.class, fragment, activity, R.layout.row_user_search);
         this.query = query;
 
         loadMoreData();
@@ -20,8 +20,8 @@ public class UserSearchResultAdapter extends PaginatedListAdapter<User, Users> {
 
     @Override
     public View createView(int position, View view, User video) {
-        TextView videoTitle = (TextView) view.findViewById(R.id.video_title);
-        videoTitle.setText(video.getName());
+        TextView nameLabel = (TextView) view.findViewById(R.id.text_name);
+        nameLabel.setText(video.getName());
         return view;
     }
 

@@ -17,6 +17,7 @@ import java.util.List;
 
 public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdapter{
     private final Fragment fragment;
+    private final int rowResource;
     private List<TSingle> itemList = new ArrayList<>();
     private Activity activity;
     private LayoutInflater inflater;
@@ -25,10 +26,11 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
     private int maxPages = 1; // Will be update upon the first request
     private Class<TContainer> type;
 
-    public PaginatedListAdapter(Class<TContainer> type, Fragment fragment, Activity activity) {
+    public PaginatedListAdapter(Class<TContainer> type, Fragment fragment, Activity activity, int rowResource) {
         this.activity = activity;
         this.fragment = fragment;
         this.type = type;
+        this.rowResource = rowResource;
     }
 
     protected void setCurrentPage(int page) {
@@ -65,7 +67,7 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
         }
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.video_list_row, null);
+            convertView = inflater.inflate(rowResource, null);
         }
 
         if (closeToEnd(position) && !loading) {
