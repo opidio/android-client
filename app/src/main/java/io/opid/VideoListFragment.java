@@ -15,7 +15,7 @@ import android.widget.ListView;
  * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
  * interface.
  */
-public class VideoListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, VideoListAdapter.AdapterStatusCahnged {
+public class VideoListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged {
     private static final String ARG_VIDEO_VIEW = "video_view";
     private VideoViewType videoViewType;
     private VideoListAdapter nextAdapter;
@@ -77,6 +77,7 @@ public class VideoListFragment extends Fragment implements SwipeRefreshLayout.On
             if (nextAdapter != null) {
                 ListView listView = (ListView) view.findViewById(R.id.main_list);
                 listView.setAdapter(nextAdapter);
+                nextAdapter = null;
                 nextAdapter = null;
 
             }

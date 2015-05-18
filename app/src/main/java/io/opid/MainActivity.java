@@ -65,7 +65,7 @@ public class MainActivity extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, SearchUserFragment.newInstance())
                     .commit();
-            getSupportActionBar().setTitle(getString(R.string.all_videos));
+            getSupportActionBar().setTitle(getString(R.string.search_users));
         } else if(position == 5) {
             // Sign Out
             Plus.AccountApi.clearDefaultAccount(googleApiClient);
