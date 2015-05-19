@@ -37,6 +37,10 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
         this.rowResource = rowResource;
     }
 
+    public Activity getActivity() {
+        return activity;
+    }
+
     protected void setCurrentPage(int page) {
         this.currentPage = page;
     }

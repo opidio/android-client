@@ -3,7 +3,9 @@ package io.opid.network.adapter;
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import io.opid.R;
 import io.opid.model.User;
@@ -21,10 +23,22 @@ public class UserSearchResultAdapter extends PaginatedListAdapter<User, Users> {
     }
 
     @Override
-    public View createView(int position, View view, User video) {
+    public View createView(int position, View view, final User user) {
         TextView nameLabel = (TextView) view.findViewById(R.id.text_name);
-        nameLabel.setText(video.getName());
+        Button followButton = (Button) view.findViewById(R.id.add_button);
+
+        nameLabel.setText(user.getName());
+        followButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                followUser(user);
+            }
+        });
         return view;
+    }
+
+    private void followUser(User user) {
+
     }
 
     @Override
