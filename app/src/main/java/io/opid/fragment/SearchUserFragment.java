@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.fragment;
 
 
 import android.app.Activity;
@@ -12,6 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
+
+import io.opid.network.adapter.PaginatedListAdapter;
+import io.opid.R;
+import io.opid.network.adapter.UserSearchResultAdapter;
 
 /**
  * A simple {@link Fragment} subclass.

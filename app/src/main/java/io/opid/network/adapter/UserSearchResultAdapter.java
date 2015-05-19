@@ -1,9 +1,11 @@
-package io.opid;
+package io.opid.network.adapter;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
+
+import io.opid.R;
 import io.opid.model.User;
 import io.opid.model.Users;
 

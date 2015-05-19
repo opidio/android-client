@@ -5,6 +5,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
+import io.opid.network.misc.OpidioImageCache;
+
 public class OpidioApplication extends Application {
     private static OpidioApplication instance;
     private RequestQueue requestQueue;

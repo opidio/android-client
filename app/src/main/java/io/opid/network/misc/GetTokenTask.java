@@ -1,8 +1,7 @@
-package io.opid;
+package io.opid.network.misc;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -11,6 +10,10 @@ import com.android.volley.VolleyError;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
+
+import io.opid.Config;
+import io.opid.OpidioApplication;
+import io.opid.R;
 import io.opid.model.Login;
 
 import java.io.IOException;
@@ -21,13 +24,11 @@ public class GetTokenTask extends AsyncTask<Void, Void, String> {
     Activity mActivity;
     String mScope;
     String mEmail;
-    private Bundle appActivities;
 
-    GetTokenTask(Activity activity, String name, String scope, Bundle appActivities) {
+    public GetTokenTask(Activity activity, String name, String scope) {
         this.mActivity = activity;
         this.mScope = scope;
         this.mEmail = name;
-        this.appActivities = appActivities;
     }
     /**
      * Gets an authentication token from Google and handles any

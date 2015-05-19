@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.network.misc;
 
 import android.content.Context;
 import android.util.AttributeSet;

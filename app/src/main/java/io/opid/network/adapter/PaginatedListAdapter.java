@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.network.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +14,10 @@ import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.opid.Config;
+import io.opid.network.misc.JacksonRequest;
+import io.opid.OpidioApplication;
 
 public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdapter{
     private final Fragment fragment;

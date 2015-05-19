@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -6,10 +6,18 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
+
+import io.opid.Config;
+import io.opid.network.misc.GetTokenTask;
+import io.opid.fragment.NavigationDrawerFragment;
+import io.opid.R;
+import io.opid.fragment.SearchUserFragment;
+import io.opid.fragment.VideoListFragment;
 
 
 public class MainActivity extends ActionBarActivity
@@ -51,13 +59,13 @@ public class MainActivity extends ActionBarActivity
         if (position == 0) {
             // Social Activity
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, VideoListFragment.newInstance(VideoViewType.ACTIONGS_BY_MY_FOLLOWERS))
+                    .replace(R.id.container, VideoListFragment.newInstance())
                     .commit();
             getSupportActionBar().setTitle(getString(R.string.social_activity));
         } else if (position == 1) {
             // All Videos
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, VideoListFragment.newInstance(VideoViewType.ACTIONGS_BY_MY_FOLLOWERS))
+                    .replace(R.id.container, VideoListFragment.newInstance())
                     .commit();
             getSupportActionBar().setTitle(getString(R.string.all_videos));
         } else if (position == 4) {
@@ -66,7 +74,7 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, SearchUserFragment.newInstance())
                     .commit();
             getSupportActionBar().setTitle(getString(R.string.search_users));
-        } else if(position == 5) {
+        } else if (position == 5) {
             // Sign Out
             Plus.AccountApi.clearDefaultAccount(googleApiClient);
             googleApiClient.disconnect();
@@ -85,11 +93,10 @@ public class MainActivity extends ActionBarActivity
     public void onConnected(Bundle bundle) {
         Bundle appActivities = new Bundle();
         appActivities.putString(GoogleAuthUtil.KEY_REQUEST_VISIBLE_ACTIVITIES, "");
-        String scopes = "oauth2:https://www.googleapis.com/auth/userinfo.profile";
+        String scopes = Config.GOOGLE_SCOPES;
         new GetTokenTask(this,
                 Plus.AccountApi.getAccountName(googleApiClient),
-                scopes,
-                appActivities).execute();
+                scopes).execute();
     }
 
     @Override

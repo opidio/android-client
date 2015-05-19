@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -16,6 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
+import io.opid.R;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.

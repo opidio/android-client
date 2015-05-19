@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import io.opid.network.adapter.PaginatedListAdapter;
+import io.opid.R;
+import io.opid.network.adapter.VideoListAdapter;
+
 /**
  * A fragment representing a list of Items.
  * <p/>
@@ -16,30 +20,18 @@ import android.widget.ListView;
  * interface.
  */
 public class VideoListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged {
-    private static final String ARG_VIDEO_VIEW = "video_view";
-    private VideoViewType videoViewType;
     private VideoListAdapter nextAdapter;
 
 //    private OnFragmentInteractionListener mListener;
 
-    public static VideoListFragment newInstance(VideoViewType videoViewType) {
+    public static VideoListFragment newInstance() {
         VideoListFragment fragment = new VideoListFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_VIDEO_VIEW, videoViewType.ordinal());
         fragment.setArguments(args);
         return fragment;
     }
 
     public VideoListFragment() {
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            videoViewType = VideoViewType.values()[getArguments().getInt(ARG_VIDEO_VIEW)];
-        }
     }
 
     @Override

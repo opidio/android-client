@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.network.misc;
 
 import com.android.volley.*;
 import com.android.volley.toolbox.HttpHeaderParser;

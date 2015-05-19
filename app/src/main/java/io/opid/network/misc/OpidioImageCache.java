@@ -1,4 +1,4 @@
-package io.opid;
+package io.opid.network.misc;
 
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
