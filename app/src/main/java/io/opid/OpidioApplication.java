@@ -11,6 +11,7 @@ public class OpidioApplication extends Application {
     private static OpidioApplication instance;
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
+    private String accessToken;
 
     @Override
     public void onCreate() {
@@ -35,5 +36,13 @@ public class OpidioApplication extends Application {
             imageLoader = new ImageLoader(getRequestQueue(), new OpidioImageCache());
         }
         return imageLoader;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }
