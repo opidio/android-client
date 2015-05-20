@@ -13,7 +13,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.opid.Config;
 import io.opid.network.misc.JacksonRequest;
@@ -85,6 +87,10 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
         return createView(position, convertView, itemList.get(position));
     }
 
+    public Map<String, String> getHeaders(Map<String, String> headers) {
+        return headers;
+    }
+
     public abstract View createView(int position, View view, TSingle element);
 
     protected void loadMoreData() {
@@ -96,7 +102,7 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
             return;
         }
 
-        OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.GET, Config.HUB_SERVER + getURL() + page, type,
+        OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.GET, Config.HUB_SERVER + getURL() + page, getParams(), type, getHeaders(new HashMap<String, String>()),
                 new Response.Listener<TContainer>() {
                     @Override
                     public void onResponse(TContainer response) {
@@ -109,6 +115,7 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
                         Toast.makeText(activity, "Could not download " + type.getName(), Toast.LENGTH_SHORT).show();
                         setLoading(false);
                     }
@@ -135,6 +142,10 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
      * Begin loading more items when X from bottom
      */
     protected abstract int loadNext();
+
+    public Map<String,String> getParams() {
+        return null;
+    }
 
     public interface AdapterStatusChanged {
         void statusChanged(boolean loading);

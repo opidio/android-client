@@ -28,5 +28,6 @@
 	<string name="search_hint">Name</string>
 	<string name="label_search">Search</string>
 	<string name="label_follow">Follow</string>
+    <string name="label_unfollow">Unfollow</string>
 
 </resources>

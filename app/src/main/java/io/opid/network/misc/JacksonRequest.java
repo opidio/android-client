@@ -7,22 +7,25 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.Map;
 
 public class JacksonRequest<T> extends Request<T> {
     private final Class<T> clazz;
     private final Response.Listener<T> listener;
     private final Map<String, String> params;
+    private Map<String, String> headers;
 
     public JacksonRequest(int method, String url, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
-        this(method, url, null, clazz, listener, errorListener);
+        this(method, url, null, clazz, new HashMap<String, String>(), listener, errorListener);
     }
 
-    public JacksonRequest(int method, String url, Map<String, String> params, Class<T> clazz, Response.Listener<T> listener, Response.ErrorListener errorListener) {
+    public JacksonRequest(int method, String url, Map<String, String> params, Class<T> clazz, Map<String, String> headers, Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(method, url, errorListener);
         this.clazz = clazz;
         this.listener = listener;
         this.params = params;
+        this.headers = headers;
     }
 
     @Override
@@ -43,6 +46,13 @@ public class JacksonRequest<T> extends Request<T> {
     @Override
     public byte[] getBody() throws AuthFailureError {
         return new JSONObject(params).toString().getBytes(Charset.forName("UTF-8"));
+    }
+
+    @Override
+    public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> headers = new HashMap<>();
+        headers.putAll(this.headers);
+        return headers;
     }
 
     @Override

@@ -13,6 +13,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 
 import io.opid.Config;
+import io.opid.fragment.FollowingFragment;
+import io.opid.fragment.MyFollowersFragment;
 import io.opid.network.misc.GetTokenTask;
 import io.opid.fragment.NavigationDrawerFragment;
 import io.opid.R;
@@ -62,18 +64,35 @@ public class MainActivity extends ActionBarActivity
                     .replace(R.id.container, VideoListFragment.newInstance())
                     .commit();
             getSupportActionBar().setTitle(getString(R.string.social_activity));
+
         } else if (position == 1) {
             // All Videos
             fragmentManager.beginTransaction()
                     .replace(R.id.container, VideoListFragment.newInstance())
                     .commit();
             getSupportActionBar().setTitle(getString(R.string.all_videos));
+
+        } else if (position == 2) {
+            // Following
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, FollowingFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.following));
+
+        } else if (position == 3) {
+            // My Followers
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, MyFollowersFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.my_followers));
+
         } else if (position == 4) {
             // Search Users
             fragmentManager.beginTransaction()
                     .replace(R.id.container, SearchUserFragment.newInstance())
                     .commit();
             getSupportActionBar().setTitle(getString(R.string.search_users));
+
         } else if (position == 5) {
             // Sign Out
             Plus.AccountApi.clearDefaultAccount(googleApiClient);

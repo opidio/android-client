@@ -14,7 +14,7 @@ import io.opid.model.Videos;
 public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
 
     public VideoListAdapter(Fragment fragment, Activity activity) {
-        super(Videos.class, fragment, activity, R.layout.video_list_row);
+        super(Videos.class, fragment, activity, R.layout.row_video_list);
         loadMoreData();
     }
 

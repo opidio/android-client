@@ -91,7 +91,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
         mDrawerListView.setOnItemClickListener(this);
         mDrawerListView.setAdapter(new ArrayAdapter<>(
                 getActionBar().getThemedContext(),
-                R.layout.drawer_text_item,
+                R.layout.row_drawer_text_item,
                 android.R.id.text1,
                 new String[]{
                         getString(R.string.social_activity),

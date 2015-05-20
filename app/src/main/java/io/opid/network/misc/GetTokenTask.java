@@ -80,7 +80,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, String> {
         OpidioApplication.getInstance().setAccessToken(token);
         Map<String, String> params = new HashMap<>();
         params.put("access_token", token);
-        OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.POST, Config.HUB_SERVER + "/auth", params, Login.class,
+        OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.POST, Config.HUB_SERVER + "/auth", params, Login.class, new HashMap<String, String>(),
                 new Response.Listener<Login>() {
                     @Override
                     public void onResponse(Login response) {
