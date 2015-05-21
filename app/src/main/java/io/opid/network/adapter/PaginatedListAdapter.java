@@ -22,6 +22,10 @@ import io.opid.network.misc.JacksonRequest;
 import io.opid.OpidioApplication;
 
 public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdapter{
+    public Fragment getFragment() {
+        return fragment;
+    }
+
     private final Fragment fragment;
     private final int rowResource;
     private List<TSingle> itemList = new ArrayList<>();

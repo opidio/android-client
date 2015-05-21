@@ -14,7 +14,7 @@ import io.opid.network.adapter.FollowingAdapter;
 import io.opid.network.adapter.MyFollowersAdapter;
 import io.opid.network.adapter.PaginatedListAdapter;
 
-public class FollowingFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged {
+public class FollowingFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, FollowingAdapter.UserUnfollowedEvent {
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView followerList;
     private ListAdapter nextAdapter;
@@ -63,5 +63,10 @@ public class FollowingFragment extends Fragment implements SwipeRefreshLayout.On
 
             }
         }
+    }
+
+    @Override
+    public void userUnfollowed() {
+        onRefresh();
     }
 }
