@@ -19,14 +19,21 @@ public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
     }
 
     @Override
-    public View createView(int position, View view, Video video) {
+    public View createView(int position, View view, final Video video) {
         TextView videoTitle = (TextView) view.findViewById(R.id.video_title);
         TextView channelName = (TextView) view.findViewById(R.id.channel_name);
         NetworkImageView thumbnail = (NetworkImageView) view.findViewById(R.id.thumbnail);
 
         videoTitle.setText(video.getVideo());
         channelName.setText(video.getChannel_name());
-        thumbnail.setImageUrl(video.getUrl() + "/thumbnail.png", OpidioApplication.getInstance().getImageLoader());
+        thumbnail.setImageUrl(video.getUrl() + "/1080p.png", OpidioApplication.getInstance().getImageLoader());
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((ClickListener) getFragment()).videoClick(video.getChannel_id(), video.getUrl());
+            }
+        });
 
         return view;
     }
@@ -46,5 +53,9 @@ public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
     @Override
     protected int loadNext() {
         return 7;
+    }
+
+    public interface ClickListener {
+        public abstract void videoClick(int channelId, String url);
     }
 }

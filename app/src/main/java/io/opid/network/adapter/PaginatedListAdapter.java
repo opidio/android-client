@@ -33,7 +33,7 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
     private LayoutInflater inflater;
     private Boolean loading;
     private int currentPage = 0;
-    private int maxPages = 1; // Will be update upon the first request
+    private int maxPages = 1; // Will be updated upon the first request
     private Class<TContainer> type;
 
     public PaginatedListAdapter(Class<TContainer> type, Fragment fragment, Activity activity, int rowResource) {

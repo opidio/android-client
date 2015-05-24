@@ -1,5 +1,6 @@
 package io.opid.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import io.opid.network.adapter.PaginatedListAdapter;
 import io.opid.R;
@@ -16,11 +18,12 @@ import io.opid.network.adapter.VideoListAdapter;
  * A fragment representing a list of Items.
  * <p/>
  * <p/>
- * Activities containing this fragment MUST implement the {@link OnFragmentInteractionListener}
+ * Activities containing this fragment MUST implement the {@link io.opid.fragment.VideoListFragment.OnVideoSelectListener}
  * interface.
  */
-public class VideoListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged {
+public class VideoListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, VideoListAdapter.ClickListener {
     private VideoListAdapter nextAdapter;
+    private OnVideoSelectListener mListener;
 
 //    private OnFragmentInteractionListener mListener;
 
@@ -70,21 +73,23 @@ public class VideoListFragment extends Fragment implements SwipeRefreshLayout.On
                 ListView listView = (ListView) view.findViewById(R.id.main_list);
                 listView.setAdapter(nextAdapter);
                 nextAdapter = null;
-                nextAdapter = null;
-
             }
         }
     }
 
-    /*
+    @Override
+    public void videoClick(int id, String videoUrl) {
+        mListener.onVideoSelect(id, videoUrl);
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnFragmentInteractionListener) activity;
+            mListener = (OnVideoSelectListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnVideoSelectListener");
         }
     }
 
@@ -93,12 +98,9 @@ public class VideoListFragment extends Fragment implements SwipeRefreshLayout.On
         super.onDetach();
         mListener = null;
     }
-*/
-    /*
-    //TODO: Use this
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(String id);
-    }*/
+
+    public interface OnVideoSelectListener {
+        public void onVideoSelect(int id, String channelUrl);
+    }
 
 }

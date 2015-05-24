@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <io.opid.view.AspectVideoView
+        android:id="@+id/video_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/channel_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_view"
+        android:layout_marginLeft="10dp"
+        android:text="Channel Placeholder"
+        android:textColor="#0000ff"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/upload_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/video_view"
+        android:gravity="end"
+        android:paddingRight="10dp"
+        android:text="Date placeholder"
+        android:textColor="#777777"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/video_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/channel_name"
+        android:layout_marginLeft="10dp"
+        android:text="Video Title Placeholder"
+        android:textColor="#222"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/label_hosted_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_title"
+        android:layout_marginLeft="10dp"
+
+        android:text="@string/hosted_by" />
+
+    <TextView
+        android:id="@+id/hosted_by"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_title"
+        android:layout_toRightOf="@id/label_hosted_by"
+        android:paddingLeft="5dp"
+        android:text="Host Placeholder"
+        android:textColor="#ff8787ff" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/label_hosted_by"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Share"
+            android:textColor="#0000ff" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/button_like"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="0dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp"
+                android:text="Like"
+                android:textColor="#0000ff" />
+
+            <TextView
+                android:id="@+id/likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Likes Placeholder" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

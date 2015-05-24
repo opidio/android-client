@@ -9,14 +9,14 @@
 			android:id="@+id/channel_name"
 			android:layout_marginLeft="10dp"
 			android:text="Channel Placeholder"
-			android:textSize="19sp"
+			android:textSize="18sp"
 			android:textColor="#0000ff"/>
 
 	<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="uploaded"
-			android:textSize="19sp"
+			android:textSize="18sp"
 			android:layout_toRightOf="@id/channel_name"
 			android:layout_toEndOf="@id/channel_name"
 			android:layout_marginLeft="5dp"
@@ -32,7 +32,7 @@
 			android:textColor="#222"
 			android:id="@+id/video_title"/>
 
-	<io.opid.network.misc.AspectNetImageView
+	<io.opid.view.AspectNetImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_below="@id/video_title"

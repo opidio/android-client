@@ -29,5 +29,8 @@
 	<string name="label_search">Search</string>
 	<string name="label_follow">Follow</string>
     <string name="label_unfollow">Unfollow</string>
+    <string name="video_video">Video</string>
+    <string name="uploaded">uploaded</string>
+    <string name="hosted_by">Hosted by</string>
 
 </resources>
