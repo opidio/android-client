@@ -132,9 +132,9 @@ public class MainActivity extends ActionBarActivity
     }
 
     @Override
-    public void onVideoSelect(int channelId, String videoUrl) {
+    public void onVideoSelect(int channelId, int videoId, String videoUrl) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, ViewVideoFragment.newInstance(channelId, videoUrl))
+                .replace(R.id.container, ViewVideoFragment.newInstance(channelId, videoId, videoUrl))
                 .commit();
         getSupportActionBar().setTitle(getString(R.string.video_video));
     }

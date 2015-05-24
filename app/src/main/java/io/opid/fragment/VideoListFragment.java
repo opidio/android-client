@@ -78,8 +78,8 @@ public class VideoListFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     @Override
-    public void videoClick(int id, String videoUrl) {
-        mListener.onVideoSelect(id, videoUrl);
+    public void videoClick(int channelId, int videoId, String videoUrl) {
+        mListener.onVideoSelect(channelId, videoId, videoUrl);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class VideoListFragment extends Fragment implements SwipeRefreshLayout.On
     }
 
     public interface OnVideoSelectListener {
-        public void onVideoSelect(int id, String channelUrl);
+        public void onVideoSelect(int id, int videoId, String channelUrl);
     }
 
 }

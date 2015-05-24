@@ -24,21 +24,28 @@ import org.w3c.dom.Text;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 import io.opid.Config;
 import io.opid.OpidioApplication;
 import io.opid.R;
 import io.opid.model.Channel;
+import io.opid.model.Likes;
+import io.opid.model.Liking;
+import io.opid.model.Login;
 import io.opid.model.VideoInfo;
 import io.opid.network.misc.JacksonRequest;
 import io.opid.util.ISO8601;
 
-public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnVideoSizeChangedListener {
+public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnVideoSizeChangedListener, View.OnClickListener {
 
     private static final String ARG_URL = "url";
     private static final String ARG_CHANNEL_ID = "channelId";
+    private static final String ARG_VIDEO_ID = "videoId";
     private String url;
     private int channelId;
+    private int videoId;
     private TextView channelName;
     private TextView videoTitle;
     private TextView hostedBy;
@@ -51,11 +58,12 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
     public ViewVideoFragment() {
     }
 
-    public static ViewVideoFragment newInstance(int channelId, String url) {
+    public static ViewVideoFragment newInstance(int channelId, int videoId, String url) {
         ViewVideoFragment viewVideoFragment = new ViewVideoFragment();
 
         Bundle args = new Bundle();
         args.putInt(ARG_CHANNEL_ID, channelId);
+        args.putInt(ARG_VIDEO_ID, videoId);
         args.putString(ARG_URL, url);
         viewVideoFragment.setArguments(args);
 
@@ -66,9 +74,12 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         url = getArguments().getString(ARG_URL);
+        videoId = getArguments().getInt(ARG_VIDEO_ID);
         channelId = getArguments().getInt(ARG_CHANNEL_ID);
 
         getVideoData();
+        getLikes();
+        getChannelInfo();
     }
 
     private void getVideoData() {
@@ -78,8 +89,6 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
                     public void onResponse(VideoInfo response) {
                         updateVideoInfo(response);
                     }
-
-
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -88,15 +97,15 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
                         Toast.makeText(getActivity(), "Could not get video info", Toast.LENGTH_SHORT).show();
                     }
                 }));
+    }
 
+    private void getChannelInfo() {
         OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.GET, Config.HUB_SERVER + "/api/channel/" + channelId, Channel.class,
                 new Response.Listener<Channel>() {
                     @Override
                     public void onResponse(Channel response) {
                         updateChannelInfo(response);
                     }
-
-
                 },
                 new Response.ErrorListener() {
                     @Override
@@ -105,6 +114,35 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
                         Toast.makeText(getActivity(), "Could not get channel info", Toast.LENGTH_SHORT).show();
                     }
                 }));
+    }
+
+    private void getLikes() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("access_token", OpidioApplication.getInstance().getAccessToken());
+        OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.GET, Config.HUB_SERVER + "/api/likes/" + videoId, new HashMap<String, String>(), Likes.class, headers,
+                new Response.Listener<Likes>() {
+                    @Override
+                    public void onResponse(Likes response) {
+                        updateLikes(response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(getActivity(), "Could not get video info", Toast.LENGTH_SHORT).show();
+                    }
+                }));
+    }
+
+    private void updateLikes(Likes likes) {
+        String text;
+        if (likes.getI_am_liking()) {
+            text = "You and " + (likes.getLikes() - 1) + " others like this";
+        } else {
+            text = likes.getLikes() + " people like this";
+        }
+        this.likes.setText(text);
     }
 
     private void updateVideoInfo(VideoInfo videoInfo) {
@@ -138,13 +176,16 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
         likeButton = (Button) view.findViewById(R.id.button_like);
         shareButton = (Button) view.findViewById(R.id.button_share);
         videoView = (VideoView) view.findViewById(R.id.video_view);
-        videoView.setOnPreparedListener(this);
+
         loadVideo();
+        likeButton.setOnClickListener(this);
+
         return view;
     }
 
     private void loadVideo() {
-        videoView.setVideoURI(Uri.parse(url + "/1080p.mp4"));
+        videoView.setOnPreparedListener(this);
+        videoView.setVideoPath(url + "/1080p.mp4");
         videoView.start();
     }
 
@@ -158,5 +199,38 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
         MediaController controller = new MediaController(getActivity());
         videoView.setMediaController(controller);
         controller.setAnchorView(videoView);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.button_like) {
+            likeVideo();
+        }
+    }
+
+    private void likeVideo() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("access_token", OpidioApplication.getInstance().getAccessToken());
+        OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.GET, Config.HUB_SERVER + "/api/toggle-like/" + videoId, new HashMap<String, String>(), Liking.class, headers,
+                new Response.Listener<Liking>() {
+                    @Override
+                    public void onResponse(Liking liking) {
+                        String message;
+                        if (liking.getLiking()) {
+                            message = "You are now liking this video";
+                        } else {
+                            message = "You are no longer liking this video";
+                        }
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                        getLikes();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(getActivity(), "Could not like the video", Toast.LENGTH_SHORT).show();
+                    }
+                }));
     }
 }

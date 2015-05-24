@@ -8,7 +8,8 @@
             "channel-name": "Ineentho",
             "slug": "first-video",
             "url": "http://test.com/first-video",
-            "video": "First Video"
+            "video": "First Video",
+            "video-id": 1
         }
     ]
 }

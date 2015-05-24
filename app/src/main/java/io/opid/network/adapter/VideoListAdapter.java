@@ -31,7 +31,7 @@ public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((ClickListener) getFragment()).videoClick(video.getChannel_id(), video.getUrl());
+                ((ClickListener) getFragment()).videoClick(video.getChannel_id(), video.getVideo_id(), video.getUrl());
             }
         });
 
@@ -56,6 +56,6 @@ public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
     }
 
     public interface ClickListener {
-        public abstract void videoClick(int channelId, String url);
+        public abstract void videoClick(int channelId, int videoId, String url);
     }
 }
