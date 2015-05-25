@@ -1,11 +1,12 @@
 package io.opid.fragment;
 
 
+import android.content.Intent;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +20,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
-import org.w3c.dom.Text;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -33,7 +32,6 @@ import io.opid.R;
 import io.opid.model.Channel;
 import io.opid.model.Likes;
 import io.opid.model.Liking;
-import io.opid.model.Login;
 import io.opid.model.VideoInfo;
 import io.opid.network.misc.JacksonRequest;
 import io.opid.util.ISO8601;
@@ -43,6 +41,7 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
     private static final String ARG_URL = "url";
     private static final String ARG_CHANNEL_ID = "channelId";
     private static final String ARG_VIDEO_ID = "videoId";
+    private static final int REQUEST_COMMENT = 0;
     private String url;
     private int channelId;
     private int videoId;
@@ -159,6 +158,16 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_COMMENT) {
+            if (resultCode == CommentDialogFragment.RESULT_CODE_FAIL) {
+                Toast.makeText(getActivity(), "Could not send comment", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Comment sent", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 
     private void updateChannelInfo(Channel channel) {
         hostedBy.setText(channel.getHosted_by());
@@ -174,11 +183,12 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
         uplodateDate = (TextView) view.findViewById(R.id.upload_date);
         likes = (TextView) view.findViewById(R.id.likes);
         likeButton = (Button) view.findViewById(R.id.button_like);
-        shareButton = (Button) view.findViewById(R.id.button_share);
+        shareButton = (Button) view.findViewById(R.id.button_comment);
         videoView = (VideoView) view.findViewById(R.id.video_view);
 
         loadVideo();
         likeButton.setOnClickListener(this);
+        shareButton.setOnClickListener(this);
 
         return view;
     }
@@ -205,7 +215,16 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
     public void onClick(View view) {
         if (view.getId() == R.id.button_like) {
             likeVideo();
+        } else if (view.getId() == R.id.button_comment) {
+            commentVideo();
         }
+    }
+
+    private void commentVideo() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        CommentDialogFragment commentDialog = CommentDialogFragment.newInstance(videoId);
+        commentDialog.setTargetFragment(this, REQUEST_COMMENT);
+        commentDialog.show(fm, "fragment_comment");
     }
 
     private void likeVideo() {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -16,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/video_view"
         android:layout_marginLeft="10dp"
-        android:text="Channel Placeholder"
+        tool:text="Channel Placeholder"
         android:textColor="#0000ff"
         android:textSize="14sp" />
 
@@ -28,7 +29,7 @@
         android:layout_below="@id/video_view"
         android:gravity="end"
         android:paddingRight="10dp"
-        android:text="Date placeholder"
+        tool:text="Date placeholder"
         android:textColor="#777777"
         android:textSize="14sp" />
 
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/channel_name"
         android:layout_marginLeft="10dp"
-        android:text="Video Title Placeholder"
+        tool:text="Video Title Placeholder"
         android:textColor="#222"
         android:textSize="18sp" />
 
@@ -58,7 +59,7 @@
         android:layout_below="@id/video_title"
         android:layout_toRightOf="@id/label_hosted_by"
         android:paddingLeft="5dp"
-        android:text="Host Placeholder"
+        tool:text="Host Placeholder"
         android:textColor="#ff8787ff" />
 
     <LinearLayout
@@ -70,11 +71,11 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_share"
+            android:id="@+id/button_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Share"
+            android:text="@string/button_comment"
             android:textColor="#0000ff" />
 
         <LinearLayout
@@ -90,7 +91,7 @@
                 android:minHeight="0dp"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text="Like"
+                android:text="@string/button_like"
                 android:textColor="#0000ff" />
 
             <TextView
@@ -98,7 +99,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Likes Placeholder" />
+                tool:text="Likes Placeholder" />
         </LinearLayout>
 
     </LinearLayout>
