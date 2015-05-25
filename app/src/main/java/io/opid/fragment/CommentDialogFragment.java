@@ -80,7 +80,7 @@ public class CommentDialogFragment extends DialogFragment {
 
     private void sendComment() {
         Map<String, String> params = new HashMap<>();
-        params.put("Access-Token", OpidioApplication.getInstance().getAccessToken());
+        params.put("access_token", OpidioApplication.getInstance().getAccessToken());
         params.put("message", commentField.getText().toString());
         params.put("video", String.valueOf(videoId));
         OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.POST, Config.HUB_SERVER + "/api/comment", params, Success.class, new HashMap<String, String>(),
