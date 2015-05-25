@@ -37,5 +37,7 @@
     <string name="header_comment">Write a comment:</string>
     <string name="send_comment">Send Comment</string>
     <string name="cancel">Cancel</string>
+	<string name="commented_on">commented on</string>
+	<string name="liked">liked</string>
 
 </resources>

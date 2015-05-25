@@ -13,11 +13,13 @@
                 }
             },
             "date": "2015-05-25T13:25:54.643648",
-            "type": "comment"
+            "type": "comment",
+            "username": "Henrik Karlsson"
         },
         {
             "date": "2015-05-25T13:25:54.643648",
             "type": "like",
+            "username": "Henrik Karlsson",
             "videoInf": {
                 "channel-id": 2,
                 "channel-name": "Clarkson, Hammond & May Live",
@@ -40,7 +42,8 @@
                 }
             },
             "date": "2015-05-25T13:25:54.643648",
-            "type": "comment"
+            "type": "comment",
+            "username": "Henrik Karlsson"
         }
     ],
     "page": 1,

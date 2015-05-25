@@ -2,6 +2,7 @@ package io.opid.network.misc;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.support.v4.app.FragmentActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -14,6 +15,7 @@ import com.google.android.gms.auth.UserRecoverableAuthException;
 import io.opid.Config;
 import io.opid.OpidioApplication;
 import io.opid.R;
+import io.opid.fragment.SocialFeedFragment;
 import io.opid.model.Login;
 
 import java.io.IOException;
@@ -86,6 +88,9 @@ public class GetTokenTask extends AsyncTask<Void, Void, String> {
                     public void onResponse(Login response) {
                         TextView loggedInAs = (TextView) mActivity.findViewById(R.id.logged_in_as);
                         loggedInAs.setText(response.getName());
+                        ((FragmentActivity)mActivity).getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.container, SocialFeedFragment.newInstance())
+                                .commit();
                     }
                 },
                 new Response.ErrorListener() {

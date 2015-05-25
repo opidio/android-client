@@ -26,6 +26,11 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
     }
 
     private final Fragment fragment;
+
+    public int getRowResource() {
+        return rowResource;
+    }
+
     private final int rowResource;
     private List<TSingle> itemList = new ArrayList<>();
     private Activity activity;
@@ -85,15 +90,20 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = getInflater();
 
-        if (convertView == null) {
-            convertView = inflater.inflate(rowResource, null);
-        }
+        convertView = getConvertView(convertView, inflater);
 
         if (closeToEnd(position) && !loading) {
             loadMoreData();
         }
 
         return createView(position, convertView, itemList.get(position));
+    }
+
+    protected View getConvertView(View convertView, LayoutInflater inflater) {
+        if (convertView == null) {
+            convertView = inflater.inflate(rowResource, null);
+        }
+        return convertView;
     }
 
     public Map<String, String> getHeaders(Map<String, String> headers) {
