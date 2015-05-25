@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,10 +34,12 @@ import io.opid.model.Channel;
 import io.opid.model.Likes;
 import io.opid.model.Liking;
 import io.opid.model.VideoInfo;
+import io.opid.network.adapter.CommentsAdapter;
+import io.opid.network.adapter.PaginatedListAdapter;
 import io.opid.network.misc.JacksonRequest;
 import io.opid.util.ISO8601;
 
-public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnVideoSizeChangedListener, View.OnClickListener {
+public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnVideoSizeChangedListener, View.OnClickListener, PaginatedListAdapter.AdapterStatusChanged {
 
     private static final String ARG_URL = "url";
     private static final String ARG_CHANNEL_ID = "channelId";
@@ -53,6 +56,7 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
     private Button shareButton;
     private Button likeButton;
     private VideoView videoView;
+    private ListView listComments;
 
     public ViewVideoFragment() {
     }
@@ -165,6 +169,7 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
                 Toast.makeText(getActivity(), "Could not send comment", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(getActivity(), "Comment sent", Toast.LENGTH_SHORT).show();
+                updateComments();
             }
         }
     }
@@ -185,12 +190,17 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
         likeButton = (Button) view.findViewById(R.id.button_like);
         shareButton = (Button) view.findViewById(R.id.button_comment);
         videoView = (VideoView) view.findViewById(R.id.video_view);
+        listComments = (ListView) view.findViewById(R.id.list_comments);
 
         loadVideo();
         likeButton.setOnClickListener(this);
         shareButton.setOnClickListener(this);
-
+        updateComments();
         return view;
+    }
+
+    private void updateComments() {
+        listComments.setAdapter(new CommentsAdapter(this, getActivity(), videoId));
     }
 
     private void loadVideo() {
@@ -251,5 +261,10 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
                         Toast.makeText(getActivity(), "Could not like the video", Toast.LENGTH_SHORT).show();
                     }
                 }));
+    }
+
+    @Override
+    public void statusChanged(boolean loading) {
+
     }
 }

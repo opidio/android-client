@@ -1,107 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/tools"
+
+
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools">
 
-    <io.opid.view.AspectVideoView
-        android:id="@+id/video_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        <io.opid.view.AspectVideoView
+            android:id="@+id/video_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
 
-    <TextView
-        android:id="@+id/channel_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/video_view"
-        android:layout_marginLeft="10dp"
-        tool:text="Channel Placeholder"
-        android:textColor="#0000ff"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/upload_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/video_view"
-        android:gravity="end"
-        android:paddingRight="10dp"
-        tool:text="Date placeholder"
-        android:textColor="#777777"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/video_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/channel_name"
-        android:layout_marginLeft="10dp"
-        tool:text="Video Title Placeholder"
-        android:textColor="#222"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/label_hosted_by"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/video_title"
-        android:layout_marginLeft="10dp"
-
-        android:text="@string/hosted_by" />
-
-    <TextView
-        android:id="@+id/hosted_by"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/video_title"
-        android:layout_toRightOf="@id/label_hosted_by"
-        android:paddingLeft="5dp"
-        tool:text="Host Placeholder"
-        android:textColor="#ff8787ff" />
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/label_hosted_by"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/button_comment"
-            android:layout_width="0dp"
+        <TextView
+            android:id="@+id/channel_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_comment"
-            android:textColor="#0000ff" />
+            android:layout_below="@id/video_view"
+            android:layout_marginLeft="10dp"
+            android:textColor="#0000ff"
+            android:textSize="14sp"
+            tool:text="Channel Placeholder" />
+
+        <TextView
+            android:id="@+id/upload_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/video_view"
+            android:gravity="end"
+            android:paddingRight="10dp"
+            android:textColor="#777777"
+            android:textSize="14sp"
+            tool:text="Date placeholder" />
+
+        <TextView
+            android:id="@+id/video_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/channel_name"
+            android:layout_marginLeft="10dp"
+            android:textColor="#222"
+            android:textSize="18sp"
+            tool:text="Video Title Placeholder" />
+
+        <TextView
+            android:id="@+id/label_hosted_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/video_title"
+            android:layout_marginLeft="10dp"
+
+            android:text="@string/hosted_by" />
+
+        <TextView
+            android:id="@+id/hosted_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/video_title"
+            android:layout_toRightOf="@id/label_hosted_by"
+            android:paddingLeft="5dp"
+            android:textColor="#ff8787ff"
+            tool:text="Host Placeholder" />
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:id="@+id/social_bar"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/label_hosted_by"
+            android:orientation="horizontal">
 
             <Button
-                android:id="@+id/button_like"
-                android:layout_width="match_parent"
+                android:id="@+id/button_comment"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:minHeight="0dp"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp"
-                android:text="@string/button_like"
+                android:layout_weight="1"
+                android:text="@string/button_comment"
                 android:textColor="#0000ff" />
 
-            <TextView
-                android:id="@+id/likes"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                tool:text="Likes Placeholder" />
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button_like"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="0dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"
+                    android:text="@string/button_like"
+                    android:textColor="#0000ff" />
+
+                <TextView
+                    android:id="@+id/likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    tool:text="Likes Placeholder" />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
-
-</RelativeLayout>
+        <ListView
+            android:id="@+id/list_comments"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/social_bar" />
+    </RelativeLayout>
