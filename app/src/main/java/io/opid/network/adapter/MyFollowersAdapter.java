@@ -42,7 +42,7 @@ public class MyFollowersAdapter extends PaginatedListAdapter<Follower, Followers
 
     @Override
     public Map<String, String> getHeaders(Map<String, String> headers) {
-        headers.put("access_token", OpidioApplication.getInstance().getAccessToken());
+        headers.put("Access-Token", OpidioApplication.getInstance().getAccessToken());
         return headers;
     }
 

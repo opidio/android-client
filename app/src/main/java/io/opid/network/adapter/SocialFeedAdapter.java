@@ -120,7 +120,7 @@ public class SocialFeedAdapter extends PaginatedListAdapter<Item, Feed> {
 
     @Override
     public Map<String, String> getHeaders(Map<String, String> headers) {
-        headers.put("access_token", OpidioApplication.getInstance().getAccessToken());
+        headers.put("Access-Token", OpidioApplication.getInstance().getAccessToken());
         return super.getHeaders(headers);
     }
 

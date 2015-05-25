@@ -6,22 +6,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import io.opid.Config;
 import io.opid.OpidioApplication;
 import io.opid.R;
-import io.opid.model.Login;
 import io.opid.model.Success;
 import io.opid.model.User;
 import io.opid.model.Users;
 import io.opid.network.misc.JacksonRequest;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UserSearchResultAdapter extends PaginatedListAdapter<User, Users> {
 

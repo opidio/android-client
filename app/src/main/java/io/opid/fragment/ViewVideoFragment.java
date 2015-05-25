@@ -121,7 +121,7 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
 
     private void getLikes() {
         Map<String, String> headers = new HashMap<>();
-        headers.put("access_token", OpidioApplication.getInstance().getAccessToken());
+        headers.put("Access-Token", OpidioApplication.getInstance().getAccessToken());
         OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.GET, Config.HUB_SERVER + "/api/likes/" + videoId, new HashMap<String, String>(), Likes.class, headers,
                 new Response.Listener<Likes>() {
                     @Override
@@ -239,7 +239,7 @@ public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPrepare
 
     private void likeVideo() {
         Map<String, String> headers = new HashMap<>();
-        headers.put("access_token", OpidioApplication.getInstance().getAccessToken());
+        headers.put("Access-Token", OpidioApplication.getInstance().getAccessToken());
         OpidioApplication.getInstance().getRequestQueue().add(new JacksonRequest<>(Request.Method.GET, Config.HUB_SERVER + "/api/toggle-like/" + videoId, new HashMap<String, String>(), Liking.class, headers,
                 new Response.Listener<Liking>() {
                     @Override
