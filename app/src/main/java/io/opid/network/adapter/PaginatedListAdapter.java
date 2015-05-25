@@ -11,15 +11,14 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import io.opid.Config;
+import io.opid.OpidioApplication;
+import io.opid.network.misc.JacksonRequest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import io.opid.Config;
-import io.opid.network.misc.JacksonRequest;
-import io.opid.OpidioApplication;
 
 public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdapter{
     public Fragment getFragment() {
@@ -30,6 +29,14 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
     private final int rowResource;
     private List<TSingle> itemList = new ArrayList<>();
     private Activity activity;
+
+    public LayoutInflater getInflater() {
+        if (inflater == null) {
+            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+        return inflater;
+    }
+
     private LayoutInflater inflater;
     private Boolean loading;
     private int currentPage = 0;
@@ -76,9 +83,7 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (inflater == null) {
-            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
+        LayoutInflater inflater = getInflater();
 
         if (convertView == null) {
             convertView = inflater.inflate(rowResource, null);

@@ -6,27 +6,19 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.widget.Toast;
-
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
-
 import io.opid.Config;
-import io.opid.fragment.FollowingFragment;
-import io.opid.fragment.MyFollowersFragment;
-import io.opid.fragment.ViewVideoFragment;
-import io.opid.network.misc.GetTokenTask;
-import io.opid.fragment.NavigationDrawerFragment;
 import io.opid.R;
-import io.opid.fragment.SearchUserFragment;
-import io.opid.fragment.VideoListFragment;
+import io.opid.fragment.*;
+import io.opid.network.misc.GetTokenTask;
 
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks, SearchUserFragment.OnFragmentInteractionListener, VideoListFragment.OnVideoSelectListener {
+        GoogleApiClient.ConnectionCallbacks, SearchUserFragment.OnFragmentInteractionListener, VideoListFragment.OnVideoSelectListener, SocialFeedFragment.OnVideoSelectListener {
 
     private GoogleApiClient googleApiClient;
 
@@ -64,7 +56,7 @@ public class MainActivity extends ActionBarActivity
         if (position == 0) {
             // Social Activity
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, VideoListFragment.newInstance())
+                    .replace(R.id.container, SocialFeedFragment.newInstance())
                     .commit();
             getSupportActionBar().setTitle(getString(R.string.social_activity));
 
