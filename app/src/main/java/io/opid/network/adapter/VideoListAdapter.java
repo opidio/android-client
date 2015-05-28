@@ -10,6 +10,10 @@ import io.opid.R;
 import io.opid.model.Video;
 import io.opid.model.Videos;
 
+/**
+ * The class responsible for populating the ListView of recently
+ * uploaded videos.
+ */
 public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
 
     public VideoListAdapter(Fragment fragment, Activity activity) {
@@ -17,6 +21,9 @@ public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
         loadMoreData();
     }
 
+    /**
+     * Create the view for one element in the ListView
+     */
     @Override
     public View createView(int position, View view, final Video video) {
         TextView videoTitle = (TextView) view.findViewById(R.id.video_title);
@@ -54,6 +61,10 @@ public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
         return 7;
     }
 
+    /**
+     * This interface has to be implemented by the fragment that
+     * is using this adapter.
+     */
     public interface ClickListener {
         public abstract void videoClick(int channelId, int videoId, String url);
     }
