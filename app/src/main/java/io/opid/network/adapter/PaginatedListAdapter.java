@@ -20,28 +20,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdapter{
-    public Fragment getFragment() {
-        return fragment;
-    }
-
+public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdapter {
     private final Fragment fragment;
-
-    public int getRowResource() {
-        return rowResource;
-    }
-
     private final int rowResource;
     private List<TSingle> itemList = new ArrayList<>();
     private Activity activity;
-
-    public LayoutInflater getInflater() {
-        if (inflater == null) {
-            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        }
-        return inflater;
-    }
-
     private LayoutInflater inflater;
     private Boolean loading;
     private int currentPage = 0;
@@ -53,6 +36,21 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
         this.fragment = fragment;
         this.type = type;
         this.rowResource = rowResource;
+    }
+
+    public Fragment getFragment() {
+        return fragment;
+    }
+
+    public int getRowResource() {
+        return rowResource;
+    }
+
+    public LayoutInflater getInflater() {
+        if (inflater == null) {
+            inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+        return inflater;
     }
 
     public Activity getActivity() {
@@ -162,7 +160,7 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
      */
     protected abstract int loadNext();
 
-    public Map<String,String> getParams() {
+    public Map<String, String> getParams() {
         return null;
     }
 

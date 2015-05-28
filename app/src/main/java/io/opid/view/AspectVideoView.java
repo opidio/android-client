@@ -22,6 +22,6 @@ public class AspectVideoView extends VideoView {
         super.onMeasure(w, h);
 
 
-        setMeasuredDimension(w, (int) ((double)9/16 * w));
+        setMeasuredDimension(w, (int) ((double) 9 / 16 * w));
     }
 }

@@ -17,14 +17,14 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
     private SocialFeedAdapter nextAdapter;
     private OnVideoSelectListener mListener;
 
+    public SocialFeedFragment() {
+    }
+
     public static SocialFeedFragment newInstance() {
         SocialFeedFragment fragment = new SocialFeedFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public SocialFeedFragment() {
     }
 
     @Override
@@ -44,7 +44,6 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
 
         return view;
     }
-
 
 
     @Override

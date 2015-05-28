@@ -6,6 +6,7 @@ import com.android.volley.toolbox.ImageLoader;
 
 public class OpidioImageCache implements ImageLoader.ImageCache {
     LruCache<String, Bitmap> bitmapLruCache = new LruCache<>(10);
+
     @Override
     public Bitmap getBitmap(String url) {
         return bitmapLruCache.get(url);

@@ -21,6 +21,6 @@ public class AspectNetImageView extends NetworkImageView {
     protected void onMeasure(int w, int h) {
         super.onMeasure(w, h);
 
-        setMeasuredDimension(w, (int) ((double)9/16 * w));
+        setMeasuredDimension(w, (int) ((double) 9 / 16 * w));
     }
 }

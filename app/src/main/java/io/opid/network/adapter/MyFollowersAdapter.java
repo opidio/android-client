@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.Map;
-
 import io.opid.OpidioApplication;
 import io.opid.R;
 import io.opid.model.Follower;
 import io.opid.model.Followers;
+
+import java.util.Map;
 
 public class MyFollowersAdapter extends PaginatedListAdapter<Follower, Followers> {
 

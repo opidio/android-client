@@ -59,8 +59,7 @@ public class FollowingAdapter extends PaginatedListAdapter<Follower, Followers> 
                         if (response.getSuccess()) {
                             Toast.makeText(getActivity(), "You are no longer following " + user.getName(), Toast.LENGTH_SHORT).show();
                             ((UserUnfollowedEvent) getFragment()).userUnfollowed();
-                        }
-                        else
+                        } else
                             Toast.makeText(getActivity(), "Could not unfollow user", Toast.LENGTH_SHORT).show();
                     }
                 },

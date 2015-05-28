@@ -8,10 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import io.opid.network.adapter.PaginatedListAdapter;
 import io.opid.R;
+import io.opid.network.adapter.PaginatedListAdapter;
 import io.opid.network.adapter.VideoListAdapter;
 
 /**
@@ -27,14 +25,14 @@ public class VideoListFragment extends Fragment implements SwipeRefreshLayout.On
 
 //    private OnFragmentInteractionListener mListener;
 
+    public VideoListFragment() {
+    }
+
     public static VideoListFragment newInstance() {
         VideoListFragment fragment = new VideoListFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public VideoListFragment() {
     }
 
     @Override

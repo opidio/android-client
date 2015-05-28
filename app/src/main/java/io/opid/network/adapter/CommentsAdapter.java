@@ -4,15 +4,9 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.TextView;
-
-import java.util.Map;
-
-import io.opid.OpidioApplication;
 import io.opid.R;
 import io.opid.model.Comment;
 import io.opid.model.Comments;
-import io.opid.model.Follower;
-import io.opid.model.Followers;
 
 public class CommentsAdapter extends PaginatedListAdapter<Comment, Comments> {
 

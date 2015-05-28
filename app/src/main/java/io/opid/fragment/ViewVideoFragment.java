@@ -10,23 +10,10 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.MediaController;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
-
+import android.widget.*;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
-
 import io.opid.Config;
 import io.opid.OpidioApplication;
 import io.opid.R;
@@ -38,6 +25,12 @@ import io.opid.network.adapter.CommentsAdapter;
 import io.opid.network.adapter.PaginatedListAdapter;
 import io.opid.network.misc.JacksonRequest;
 import io.opid.util.ISO8601;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ViewVideoFragment extends Fragment implements MediaPlayer.OnPreparedListener, MediaPlayer.OnVideoSizeChangedListener, View.OnClickListener, PaginatedListAdapter.AdapterStatusChanged {
 

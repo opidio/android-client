@@ -4,7 +4,6 @@ import android.app.Application;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
-
 import io.opid.network.misc.OpidioImageCache;
 
 public class OpidioApplication extends Application {
@@ -13,14 +12,14 @@ public class OpidioApplication extends Application {
     private ImageLoader imageLoader;
     private String accessToken;
 
+    public static OpidioApplication getInstance() {
+        return instance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-    }
-
-    public static OpidioApplication getInstance() {
-        return instance;
     }
 
     public RequestQueue getRequestQueue() {

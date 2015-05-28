@@ -7,31 +7,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-
-import java.util.HashMap;
-import java.util.Map;
-
 import io.opid.Config;
 import io.opid.OpidioApplication;
 import io.opid.R;
 import io.opid.model.Success;
 import io.opid.network.misc.JacksonRequest;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CommentDialogFragment extends DialogFragment {
 
-    private static final String ARG_VIDEO_ID = "videoId";
     public static final int RESULT_CODE_SUCCESS = 0;
     public static final int RESULT_CODE_FAIL = 1;
+    private static final String ARG_VIDEO_ID = "videoId";
     private EditText commentField;
     private int videoId;
 

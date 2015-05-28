@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import io.opid.R;
 import io.opid.network.adapter.FollowingAdapter;
-import io.opid.network.adapter.MyFollowersAdapter;
 import io.opid.network.adapter.PaginatedListAdapter;
 
 public class FollowingFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, FollowingAdapter.UserUnfollowedEvent {

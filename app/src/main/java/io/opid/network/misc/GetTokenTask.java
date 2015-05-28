@@ -11,7 +11,6 @@ import com.android.volley.VolleyError;
 import com.google.android.gms.auth.GoogleAuthException;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.auth.UserRecoverableAuthException;
-
 import io.opid.Config;
 import io.opid.OpidioApplication;
 import io.opid.R;
@@ -32,6 +31,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, String> {
         this.mScope = scope;
         this.mEmail = name;
     }
+
     /**
      * Gets an authentication token from Google and handles any
      * GoogleAuthException that may occur.
@@ -88,7 +88,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, String> {
                     public void onResponse(Login response) {
                         TextView loggedInAs = (TextView) mActivity.findViewById(R.id.logged_in_as);
                         loggedInAs.setText(response.getName());
-                        ((FragmentActivity)mActivity).getSupportFragmentManager().beginTransaction()
+                        ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.container, SocialFeedFragment.newInstance())
                                 .commit();
                     }

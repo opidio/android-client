@@ -8,7 +8,6 @@ import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
-
 import io.opid.R;
 
 public class WelcomeActivity extends Activity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
@@ -93,7 +92,8 @@ public class WelcomeActivity extends Activity implements View.OnClickListener, G
 
     /**
      * Toggle between loading and showing login button
-     * @param visible  true ? login button shown, loading animation hidden
+     *
+     * @param visible true ? login button shown, loading animation hidden
      */
     private void toggleLoginButton(boolean visible) {
         View loginButton = findViewById(R.id.sign_in_button);

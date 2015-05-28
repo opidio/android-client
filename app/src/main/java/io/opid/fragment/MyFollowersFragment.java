@@ -8,11 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import io.opid.R;
 import io.opid.network.adapter.MyFollowersAdapter;
 import io.opid.network.adapter.PaginatedListAdapter;
-import io.opid.network.adapter.VideoListAdapter;
 
 public class MyFollowersFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged {
     private SwipeRefreshLayout swipeRefreshLayout;
