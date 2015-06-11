@@ -27,13 +27,6 @@ public class VideoListFragment extends OpidioFragment implements SwipeRefreshLay
     public VideoListFragment() {
     }
 
-    public static VideoListFragment newInstance() {
-        VideoListFragment fragment = new VideoListFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_video_list, container, false);

@@ -16,10 +16,6 @@ public class FollowingFragment extends OpidioFragment implements SwipeRefreshLay
     private ListView followerList;
     private ListAdapter nextAdapter;
 
-    public static FollowingFragment newInstance() {
-        return new FollowingFragment();
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

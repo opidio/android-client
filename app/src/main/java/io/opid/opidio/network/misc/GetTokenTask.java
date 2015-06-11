@@ -89,7 +89,7 @@ public class GetTokenTask extends AsyncTask<Void, Void, String> {
                         TextView loggedInAs = (TextView) mActivity.findViewById(R.id.logged_in_as);
                         loggedInAs.setText(response.getName());
                         ((FragmentActivity) mActivity).getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.container, SocialFeedFragment.newInstance())
+                                .replace(R.id.container, new SocialFeedFragment())
                                 .commit();
                     }
                 },

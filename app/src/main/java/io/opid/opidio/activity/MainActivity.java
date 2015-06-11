@@ -3,14 +3,15 @@ package io.opid.opidio.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.view.MenuItem;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.plus.Plus;
 import io.opid.opidio.Config;
+import io.opid.opidio.OpidioApplication;
 import io.opid.opidio.R;
 import io.opid.opidio.fragment.*;
 import io.opid.opidio.network.misc.GetTokenTask;
@@ -18,7 +19,11 @@ import io.opid.opidio.network.misc.GetTokenTask;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks, SearchUserFragment.OnFragmentInteractionListener, VideoListFragment.OnVideoSelectListener, SocialFeedFragment.OnVideoSelectListener {
+        GoogleApiClient.ConnectionCallbacks, VideoListFragment.OnVideoSelectListener, SocialFeedFragment.OnVideoSelectListener {
+
+    public GoogleApiClient getGoogleApiClient() {
+        return googleApiClient;
+    }
 
     private GoogleApiClient googleApiClient;
 
@@ -27,6 +32,8 @@ public class MainActivity extends ActionBarActivity
         super.onStart();
         googleApiClient.connect();
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,43 +58,7 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        switch (position) {
-            case 0:
-                // Social Activity
-                navigateFragment(SocialFeedFragment.newInstance(), 0);
-                break;
-            case 1:
-                // All Videos
-                navigateFragment(VideoListFragment.newInstance(), 1);
-                break;
-            case 2:
-                // Following
-                navigateFragment(FollowingFragment.newInstance(), 2);
-                break;
-            case 3:
-                // My Followers
-                navigateFragment(MyFollowersFragment.newInstance(), 3);
-                break;
-            case 4:
-                // Search Users
-                navigateFragment(SearchUserFragment.newInstance(), 4);
-                break;
-            case 5:
-                // Sign Out
-                Plus.AccountApi.clearDefaultAccount(googleApiClient);
-                googleApiClient.disconnect();
-
-                googleApiClient.connect();
-                startActivity(new Intent(this, WelcomeActivity.class));
-                break;
-        }
-    }
-
-
-    private void navigateFragment(OpidioFragment fragment, int drawerPosition) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.container, fragment);
-        transaction.commit();
+        OpidioApplication.getInstance().getMenuItems().get(position).run(this);
     }
 
     @Override
@@ -105,14 +76,10 @@ public class MainActivity extends ActionBarActivity
                 scopes).execute();
     }
 
+
     @Override
     public void onConnectionSuspended(int i) {
         googleApiClient.connect();
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
     }
 
     @Override

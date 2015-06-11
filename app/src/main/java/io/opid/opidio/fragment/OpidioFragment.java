@@ -11,7 +11,8 @@ public abstract class OpidioFragment extends Fragment {
 
     @Override
     public void onStart() {
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle(getName());
+        MainActivity activity = (MainActivity) getActivity();
+        activity.setTitle(getName());
         super.onStart();
     }
 }

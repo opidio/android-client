@@ -19,7 +19,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import io.opid.opidio.OpidioApplication;
 import io.opid.opidio.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -95,14 +100,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
                 getActionBar().getThemedContext(),
                 R.layout.row_drawer_text_item,
                 android.R.id.text1,
-                new String[]{
-                        getString(R.string.social_activity),
-                        getString(R.string.all_videos),
-                        getString(R.string.following),
-                        getString(R.string.my_followers),
-                        getString(R.string.search_users),
-                        getString(R.string.sign_out)
-                }));
+                getTitleList()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return drawerFragment;
     }
@@ -221,6 +219,15 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         selectItem(position);
+    }
+
+    public List<String> getTitleList() {
+        List<String> names = new ArrayList<>();
+        HashMap<Integer, io.opid.opidio.menu.MenuItem> menuItems = OpidioApplication.getInstance().getMenuItems();
+        for (io.opid.opidio.menu.MenuItem menuItem : menuItems.values()) {
+            names.add(menuItem.getName());
+        }
+        return names;
     }
 
     /**
