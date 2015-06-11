@@ -32,7 +32,7 @@
 			android:textColor="#222"
 			android:id="@+id/video_title"/>
 
-	<io.opid.view.AspectNetImageView
+	<io.opid.opidio.view.AspectNetImageView
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_below="@id/video_title"

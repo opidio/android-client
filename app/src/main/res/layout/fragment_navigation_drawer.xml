@@ -34,7 +34,7 @@
 			android:dividerHeight="0dp"
 			android:layout_below="@+id/logged_in_as_label"
 			android:id="@+id/drawer_list"
-			tools:context="io.opid.fragment.NavigationDrawerFragment"/>
+			tools:context="io.opid.opidio.fragment.NavigationDrawerFragment"/>
 
 
 </RelativeLayout>

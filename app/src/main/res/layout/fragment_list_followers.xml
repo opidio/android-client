@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="io.opid.fragment.SearchUserFragment">
+    tools:context="io.opid.opidio.fragment.SearchUserFragment">
 
 
     <LinearLayout
@@ -24,7 +24,7 @@
         android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="io.opid.activity.MainActivity$PlaceholderFragment">
+        tools:context="io.opid.opidio.activity.MainActivity$PlaceholderFragment">
 
 
         <ListView

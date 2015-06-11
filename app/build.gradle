@@ -20,7 +20,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "io.opid"
+        applicationId "io.opid.opidio"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -69,6 +69,6 @@ jsonSchema2Pojo {
     targetDirectory = file("${project.rootDir}/build/generated-sources/js2p")
     sourceType = 'json'
     annotationStyle = 'jackson2'
-    targetPackage = 'io.opid.model'
+    targetPackage = 'io.opid.opidio.model'
     removeOldOutput = true
 }

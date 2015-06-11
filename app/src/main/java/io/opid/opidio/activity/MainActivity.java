@@ -1,0 +1,133 @@
+package io.opid.opidio.activity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.plus.Plus;
+import io.opid.opidio.Config;
+import io.opid.opidio.R;
+import io.opid.opidio.fragment.*;
+import io.opid.opidio.network.misc.GetTokenTask;
+
+
+public class MainActivity extends ActionBarActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleApiClient.OnConnectionFailedListener,
+        GoogleApiClient.ConnectionCallbacks, SearchUserFragment.OnFragmentInteractionListener, VideoListFragment.OnVideoSelectListener, SocialFeedFragment.OnVideoSelectListener {
+
+    private GoogleApiClient googleApiClient;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        googleApiClient.connect();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+
+        // Set up the drawer.
+        drawerFragment.setUp(
+                R.id.navigation_drawer,
+                (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        googleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Plus.API)
+                .addScope(Plus.SCOPE_PLUS_LOGIN)
+                .addOnConnectionFailedListener(this)
+                .addConnectionCallbacks(this)
+                .build();
+    }
+
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        if (position == 0) {
+            // Social Activity
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, SocialFeedFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.social_activity));
+
+        } else if (position == 1) {
+            // All Videos
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, VideoListFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.all_videos));
+
+        } else if (position == 2) {
+            // Following
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, FollowingFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.following));
+
+        } else if (position == 3) {
+            // My Followers
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, MyFollowersFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.my_followers));
+
+        } else if (position == 4) {
+            // Search Users
+            fragmentManager.beginTransaction()
+                    .replace(R.id.container, SearchUserFragment.newInstance())
+                    .commit();
+            getSupportActionBar().setTitle(getString(R.string.search_users));
+
+        } else if (position == 5) {
+            // Sign Out
+            Plus.AccountApi.clearDefaultAccount(googleApiClient);
+            googleApiClient.disconnect();
+
+            googleApiClient.connect();
+            startActivity(new Intent(this, WelcomeActivity.class));
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        startActivity(new Intent(this, WelcomeActivity.class));
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Bundle appActivities = new Bundle();
+        appActivities.putString(GoogleAuthUtil.KEY_REQUEST_VISIBLE_ACTIVITIES, "");
+        String scopes = Config.GOOGLE_SCOPES;
+        new GetTokenTask(this,
+                Plus.AccountApi.getAccountName(googleApiClient),
+                scopes).execute();
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        googleApiClient.connect();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onVideoSelect(int channelId, int videoId, String videoUrl) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, ViewVideoFragment.newInstance(channelId, videoId, videoUrl))
+                .commit();
+        getSupportActionBar().setTitle(getString(R.string.video_video));
+    }
+}
