@@ -1,36 +1,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="io.opid.opidio.fragment.SearchUserFragment">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="io.opid.opidio.fragment.SearchUserFragment">
 
 
     <LinearLayout
-        android:id="@+id/progress_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone">
+            android:id="@+id/progress_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
 
         <ProgressBar
-            android:id="@+id/progress_circle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+                android:id="@+id/progress_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
     </LinearLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="io.opid.opidio.activity.MainActivity$PlaceholderFragment">
+            android:id="@+id/swipe_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="io.opid.opidio.activity.MainActivity$PlaceholderFragment">
 
 
         <ListView
-            android:id="@+id/main_list"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+                android:id="@+id/main_list"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

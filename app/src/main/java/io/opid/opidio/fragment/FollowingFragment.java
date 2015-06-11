@@ -1,7 +1,6 @@
 package io.opid.opidio.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,7 @@ import io.opid.opidio.R;
 import io.opid.opidio.network.adapter.FollowingAdapter;
 import io.opid.opidio.network.adapter.PaginatedListAdapter;
 
-public class FollowingFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, FollowingAdapter.UserUnfollowedEvent {
+public class FollowingFragment extends OpidioFragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, FollowingAdapter.UserUnfollowedEvent {
     private SwipeRefreshLayout swipeRefreshLayout;
     private ListView followerList;
     private ListAdapter nextAdapter;
@@ -66,5 +65,10 @@ public class FollowingFragment extends Fragment implements SwipeRefreshLayout.On
     @Override
     public void userUnfollowed() {
         onRefresh();
+    }
+
+    @Override
+    public String getName() {
+        return getString(R.string.following);
     }
 }

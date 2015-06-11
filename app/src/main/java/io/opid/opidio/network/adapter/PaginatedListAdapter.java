@@ -23,7 +23,8 @@ import java.util.Map;
 /**
  * A basic list adapter that takes care of downloading more items
  * as the list is scrolled down. It's used by all ListAdapters.
- * @param <TSingle> Example: Video
+ *
+ * @param <TSingle>    Example: Video
  * @param <TContainer> Example: Videos
  */
 public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdapter {

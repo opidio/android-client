@@ -24,7 +24,7 @@ import io.opid.opidio.network.adapter.UserSearchResultAdapter;
  * Use the {@link SearchUserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SearchUserFragment extends Fragment implements View.OnClickListener, TextView.OnEditorActionListener, SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged {
+public class SearchUserFragment extends OpidioFragment implements View.OnClickListener, TextView.OnEditorActionListener, SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged {
 
     private Button submitButton;
     private EditText searchField;
@@ -126,6 +126,11 @@ public class SearchUserFragment extends Fragment implements View.OnClickListener
             search();
         }
         return false;
+    }
+
+    @Override
+    public String getName() {
+        return getString(R.string.search_users);
     }
 
     /**

@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/channel_name"
-			android:layout_marginLeft="10dp"
-			android:text="Channel Placeholder"
-			android:textSize="18sp"
-			android:textColor="#0000ff"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/channel_name"
+            android:layout_marginLeft="10dp"
+            android:text="Channel Placeholder"
+            android:textSize="18sp"
+            android:textColor="#0000ff"/>
 
-	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="uploaded"
-			android:textSize="18sp"
-			android:layout_toRightOf="@id/channel_name"
-			android:layout_toEndOf="@id/channel_name"
-			android:layout_marginLeft="5dp"
-			android:textColor="#777"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="uploaded"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/channel_name"
+            android:layout_toEndOf="@id/channel_name"
+            android:layout_marginLeft="5dp"
+            android:textColor="#777"/>
 
-	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="Video Title Placeholder"
-			android:layout_marginLeft="10dp"
-			android:layout_below="@id/channel_name"
-			android:textSize="15sp"
-			android:textColor="#222"
-			android:id="@+id/video_title"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Video Title Placeholder"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/channel_name"
+            android:textSize="15sp"
+            android:textColor="#222"
+            android:id="@+id/video_title"/>
 
-	<io.opid.opidio.view.AspectNetImageView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/video_title"
-			android:id="@+id/thumbnail"
-			android:background="#ffc5cbd1"
-			android:layout_margin="5dp"
-			android:scaleType="fitXY"/>
+    <io.opid.opidio.view.AspectNetImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/video_title"
+            android:id="@+id/thumbnail"
+            android:background="#ffc5cbd1"
+            android:layout_margin="5dp"
+            android:scaleType="fitXY"/>
 
 </RelativeLayout>

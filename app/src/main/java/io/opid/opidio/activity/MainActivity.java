@@ -3,7 +3,7 @@ package io.opid.opidio.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import com.google.android.gms.auth.GoogleAuthUtil;
@@ -21,6 +21,7 @@ public class MainActivity extends ActionBarActivity
         GoogleApiClient.ConnectionCallbacks, SearchUserFragment.OnFragmentInteractionListener, VideoListFragment.OnVideoSelectListener, SocialFeedFragment.OnVideoSelectListener {
 
     private GoogleApiClient googleApiClient;
+    private int oldDrawerPosition = -1;
 
     @Override
     protected void onStart() {
@@ -51,51 +52,48 @@ public class MainActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        switch (position) {
+            case 0:
+                // Social Activity
+                navigateFragment(SocialFeedFragment.newInstance(), 0);
+                break;
+            case 1:
+                // All Videos
+                navigateFragment(VideoListFragment.newInstance(), 1);
+                break;
+            case 2:
+                // Following
+                navigateFragment(FollowingFragment.newInstance(), 2);
+                break;
+            case 3:
+                // My Followers
+                navigateFragment(MyFollowersFragment.newInstance(), 3);
+                break;
+            case 4:
+                // Search Users
+                navigateFragment(SearchUserFragment.newInstance(), 4);
+                break;
+            case 5:
+                // Sign Out
+                Plus.AccountApi.clearDefaultAccount(googleApiClient);
+                googleApiClient.disconnect();
 
-        if (position == 0) {
-            // Social Activity
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, SocialFeedFragment.newInstance())
-                    .commit();
-            getSupportActionBar().setTitle(getString(R.string.social_activity));
-
-        } else if (position == 1) {
-            // All Videos
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, VideoListFragment.newInstance())
-                    .commit();
-            getSupportActionBar().setTitle(getString(R.string.all_videos));
-
-        } else if (position == 2) {
-            // Following
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, FollowingFragment.newInstance())
-                    .commit();
-            getSupportActionBar().setTitle(getString(R.string.following));
-
-        } else if (position == 3) {
-            // My Followers
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, MyFollowersFragment.newInstance())
-                    .commit();
-            getSupportActionBar().setTitle(getString(R.string.my_followers));
-
-        } else if (position == 4) {
-            // Search Users
-            fragmentManager.beginTransaction()
-                    .replace(R.id.container, SearchUserFragment.newInstance())
-                    .commit();
-            getSupportActionBar().setTitle(getString(R.string.search_users));
-
-        } else if (position == 5) {
-            // Sign Out
-            Plus.AccountApi.clearDefaultAccount(googleApiClient);
-            googleApiClient.disconnect();
-
-            googleApiClient.connect();
-            startActivity(new Intent(this, WelcomeActivity.class));
+                googleApiClient.connect();
+                startActivity(new Intent(this, WelcomeActivity.class));
+                break;
         }
+    }
+
+
+    private void navigateFragment(OpidioFragment fragment, int drawerPosition) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, fragment);
+        if (oldDrawerPosition != -1) {
+            transaction.addToBackStack("topFragment");
+        }
+        transaction.commit();
+
+        oldDrawerPosition = drawerPosition;
     }
 
     @Override
@@ -127,6 +125,7 @@ public class MainActivity extends ActionBarActivity
     public void onVideoSelect(int channelId, int videoId, String videoUrl) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, ViewVideoFragment.newInstance(channelId, videoId, videoUrl))
+                .addToBackStack("video")
                 .commit();
         getSupportActionBar().setTitle(getString(R.string.video_video));
     }

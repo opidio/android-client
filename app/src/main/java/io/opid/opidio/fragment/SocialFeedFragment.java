@@ -2,7 +2,6 @@ package io.opid.opidio.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,7 @@ import io.opid.opidio.R;
 import io.opid.opidio.network.adapter.PaginatedListAdapter;
 import io.opid.opidio.network.adapter.SocialFeedAdapter;
 
-public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, SocialFeedAdapter.ClickListener {
+public class SocialFeedFragment extends OpidioFragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, SocialFeedAdapter.ClickListener {
     private SocialFeedAdapter nextAdapter;
     private OnVideoSelectListener mListener;
 
@@ -93,6 +92,11 @@ public class SocialFeedFragment extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void videoClick(int channelId, int videoId, String url) {
         mListener.onVideoSelect(channelId, videoId, url);
+    }
+
+    @Override
+    public String getName() {
+        return getString(R.string.social_activity);
     }
 
     public interface OnVideoSelectListener {

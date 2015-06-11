@@ -2,7 +2,6 @@ package io.opid.opidio.fragment;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +18,7 @@ import io.opid.opidio.network.adapter.VideoListAdapter;
  * Activities containing this fragment MUST implement the {@link io.opid.opidio.fragment.VideoListFragment.OnVideoSelectListener}
  * interface.
  */
-public class VideoListFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, VideoListAdapter.ClickListener {
+public class VideoListFragment extends OpidioFragment implements SwipeRefreshLayout.OnRefreshListener, PaginatedListAdapter.AdapterStatusChanged, VideoListAdapter.ClickListener {
     private VideoListAdapter nextAdapter;
     private OnVideoSelectListener mListener;
 
@@ -95,6 +94,11 @@ public class VideoListFragment extends Fragment implements SwipeRefreshLayout.On
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public String getName() {
+        return getString(R.string.all_videos);
     }
 
     public interface OnVideoSelectListener {

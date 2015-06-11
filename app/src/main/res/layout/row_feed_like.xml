@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				xmlns:tool="http://schemas.android.com/tools"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
+                xmlns:tool="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-	<TextView
-			android:id="@+id/date"
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_alignParentRight="true"
-			android:gravity="end"
-			android:paddingRight="10dp"
-			android:textColor="#777777"
-			android:textSize="14sp"
-			tool:text="Date placeholder" />
+    <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="end"
+            android:paddingRight="10dp"
+            android:textColor="#777777"
+            android:textSize="14sp"
+            tool:text="Date placeholder"/>
 
-	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:id="@+id/username"
-			android:layout_marginLeft="10dp"
-			tool:text="Username placeholder"
-			android:textSize="18sp"
-			android:textColor="#0000ff"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/username"
+            android:layout_marginLeft="10dp"
+            tool:text="Username placeholder"
+            android:textSize="18sp"
+            android:textColor="#0000ff"/>
 
-	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:text="@string/liked"
-			android:textSize="18sp"
-			android:layout_toRightOf="@id/username"
-			android:layout_toEndOf="@id/username"
-			android:layout_marginLeft="5dp"
-			android:textColor="#777"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/liked"
+            android:textSize="18sp"
+            android:layout_toRightOf="@id/username"
+            android:layout_toEndOf="@id/username"
+            android:layout_marginLeft="5dp"
+            android:textColor="#777"/>
 
-	<TextView
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			tool:text="Video Title Placeholder"
-			android:layout_marginLeft="10dp"
-			android:layout_below="@id/username"
-			android:textSize="15sp"
-			android:textColor="#222"
-			android:id="@+id/video_title"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tool:text="Video Title Placeholder"
+            android:layout_marginLeft="10dp"
+            android:layout_below="@id/username"
+            android:textSize="15sp"
+            android:textColor="#222"
+            android:id="@+id/video_title"/>
 
-	<io.opid.opidio.view.AspectNetImageView
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:layout_below="@id/video_title"
-			android:id="@+id/thumbnail"
-			android:background="#ffc5cbd1"
-			android:layout_margin="5dp"
-			android:scaleType="fitXY"/>
+    <io.opid.opidio.view.AspectNetImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/video_title"
+            android:id="@+id/thumbnail"
+            android:background="#ffc5cbd1"
+            android:layout_margin="5dp"
+            android:scaleType="fitXY"/>
 </RelativeLayout>

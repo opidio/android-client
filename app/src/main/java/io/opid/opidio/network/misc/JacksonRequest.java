@@ -1,6 +1,5 @@
 package io.opid.opidio.network.misc;
 
-import com.android.volley.*;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
