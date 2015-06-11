@@ -52,7 +52,7 @@ public class OpidioApplication extends Application {
                 googleApiClient.disconnect();
 
                 googleApiClient.connect();
-                startActivity(new Intent(mainActivity, WelcomeActivity.class));
+                mainActivity.startActivity(new Intent(mainActivity, WelcomeActivity.class));
             }
 
             @Override
