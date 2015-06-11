@@ -1,5 +1,6 @@
 package io.opid.opidio.fragment;
 
+import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import io.opid.opidio.OpidioApplication;
@@ -13,12 +14,12 @@ import java.util.Map;
  * A base fragment used by all main fragments.
  */
 public abstract class OpidioFragment extends Fragment {
-    public abstract String getName();
+    public abstract String getName(Context context);
 
     @Override
     public void onStart() {
         MainActivity activity = (MainActivity) getActivity();
-        activity.setTitle(getName());
+        activity.setTitle(getName(activity));
         Map<Integer, MenuItem> menuItems = OpidioApplication.getInstance().getMenuItems();
         Integer menuIndex = findMenuIndex(menuItems);
         if (menuIndex != null) {

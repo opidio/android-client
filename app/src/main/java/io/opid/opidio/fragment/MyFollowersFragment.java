@@ -1,5 +1,6 @@
 package io.opid.opidio.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -59,7 +60,7 @@ public class MyFollowersFragment extends OpidioFragment implements SwipeRefreshL
     }
 
     @Override
-    public String getName() {
-        return getString(R.string.my_followers);
+    public String getName(Context context) {
+        return context.getString(R.string.my_followers);
     }
 }

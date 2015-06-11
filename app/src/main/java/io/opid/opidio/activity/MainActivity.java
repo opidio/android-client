@@ -2,6 +2,7 @@ package io.opid.opidio.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.widget.Toast;
@@ -28,6 +29,15 @@ public class MainActivity extends ActionBarActivity
 
     public GoogleApiClient getGoogleApiClient() {
         return googleApiClient;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            // End of back stack, minimize the app instead of going back into the loginscreen
+            moveTaskToBack(true);
+        }
+        super.onBackPressed();
     }
 
     @Override

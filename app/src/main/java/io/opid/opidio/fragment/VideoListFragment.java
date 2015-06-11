@@ -1,6 +1,7 @@
 package io.opid.opidio.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -90,8 +91,8 @@ public class VideoListFragment extends OpidioFragment implements SwipeRefreshLay
     }
 
     @Override
-    public String getName() {
-        return getString(R.string.all_videos);
+    public String getName(Context context) {
+        return context.getString(R.string.all_videos);
     }
 
     public interface OnVideoSelectListener {

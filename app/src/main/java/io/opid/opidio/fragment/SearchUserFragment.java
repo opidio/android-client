@@ -2,6 +2,7 @@ package io.opid.opidio.fragment;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -98,11 +99,8 @@ public class SearchUserFragment extends OpidioFragment implements View.OnClickLi
     }
 
     @Override
-    public
-
-
-    String getName() {
-        return getString(R.string.search_users);
+    public String getName(Context context) {
+        return context.getString(R.string.search_users);
     }
 
 }
