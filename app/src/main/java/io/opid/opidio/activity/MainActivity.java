@@ -21,7 +21,6 @@ public class MainActivity extends ActionBarActivity
         GoogleApiClient.ConnectionCallbacks, SearchUserFragment.OnFragmentInteractionListener, VideoListFragment.OnVideoSelectListener, SocialFeedFragment.OnVideoSelectListener {
 
     private GoogleApiClient googleApiClient;
-    private int oldDrawerPosition = -1;
 
     @Override
     protected void onStart() {
@@ -88,12 +87,7 @@ public class MainActivity extends ActionBarActivity
     private void navigateFragment(OpidioFragment fragment, int drawerPosition) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.container, fragment);
-        if (oldDrawerPosition != -1) {
-            transaction.addToBackStack("topFragment");
-        }
         transaction.commit();
-
-        oldDrawerPosition = drawerPosition;
     }
 
     @Override
