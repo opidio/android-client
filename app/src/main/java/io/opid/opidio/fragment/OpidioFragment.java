@@ -19,7 +19,7 @@ public abstract class OpidioFragment extends Fragment {
     @Override
     public void onStart() {
         MainActivity activity = (MainActivity) getActivity();
-        activity.setTitle(getName(activity));
+        activity.getSupportActionBar().setTitle(getName(activity));
         Map<Integer, MenuItem> menuItems = OpidioApplication.getInstance().getMenuItems();
         Integer menuIndex = findMenuIndex(menuItems);
         if (menuIndex != null) {
