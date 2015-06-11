@@ -1,11 +1,10 @@
 package io.opid.opidio.activity;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
-import android.view.MenuItem;
+import android.widget.Toast;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -13,7 +12,10 @@ import com.google.android.gms.plus.Plus;
 import io.opid.opidio.Config;
 import io.opid.opidio.OpidioApplication;
 import io.opid.opidio.R;
-import io.opid.opidio.fragment.*;
+import io.opid.opidio.fragment.NavigationDrawerFragment;
+import io.opid.opidio.fragment.SocialFeedFragment;
+import io.opid.opidio.fragment.VideoListFragment;
+import io.opid.opidio.fragment.ViewVideoFragment;
 import io.opid.opidio.network.misc.GetTokenTask;
 
 
@@ -21,11 +23,12 @@ public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks, GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks, VideoListFragment.OnVideoSelectListener, SocialFeedFragment.OnVideoSelectListener {
 
+    private NavigationDrawerFragment drawerFragment;
+    private GoogleApiClient googleApiClient;
+
     public GoogleApiClient getGoogleApiClient() {
         return googleApiClient;
     }
-
-    private GoogleApiClient googleApiClient;
 
     @Override
     protected void onStart() {
@@ -33,14 +36,12 @@ public class MainActivity extends ActionBarActivity
         googleApiClient.connect();
     }
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
+        drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
 
         // Set up the drawer.
@@ -89,5 +90,9 @@ public class MainActivity extends ActionBarActivity
                 .addToBackStack("video")
                 .commit();
         getSupportActionBar().setTitle(getString(R.string.video_video));
+    }
+
+    public void setMenuIndex(int menuIndex) {
+        drawerFragment.setMenuIndex(menuIndex);
     }
 }

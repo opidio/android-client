@@ -231,6 +231,11 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
         return names;
     }
 
+    public void setMenuIndex(int menuIndex) {
+        mDrawerListView.setItemChecked(menuIndex, true);
+    }
+
+
     /**
      * Callbacks interface that all activities using this fragment must implement.
      */

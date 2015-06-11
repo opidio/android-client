@@ -18,6 +18,7 @@
             android:name="io.opid.opidio.OpidioApplication">
         <activity
                 android:name=".activity.WelcomeActivity"
+                android:noHistory="true"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
