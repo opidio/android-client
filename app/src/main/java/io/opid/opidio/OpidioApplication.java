@@ -16,15 +16,17 @@ import io.opid.opidio.menu.MenuItem;
 import io.opid.opidio.network.misc.OpidioImageCache;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class OpidioApplication extends Application {
     private static OpidioApplication instance;
     private RequestQueue requestQueue;
     private ImageLoader imageLoader;
     private String accessToken;
-    private final HashMap<Integer, MenuItem> menuItems = new HashMap<>();
+    private final Map<Integer, MenuItem> menuItems = new LinkedHashMap<>();
 
-    public HashMap<Integer, MenuItem> getMenuItems() {
+    public Map<Integer, MenuItem> getMenuItems() {
         return menuItems;
     }
 

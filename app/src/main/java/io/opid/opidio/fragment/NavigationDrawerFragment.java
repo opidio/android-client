@@ -25,6 +25,7 @@ import io.opid.opidio.R;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -223,7 +224,7 @@ public class NavigationDrawerFragment extends Fragment implements AdapterView.On
 
     public List<String> getTitleList() {
         List<String> names = new ArrayList<>();
-        HashMap<Integer, io.opid.opidio.menu.MenuItem> menuItems = OpidioApplication.getInstance().getMenuItems();
+        Map<Integer, io.opid.opidio.menu.MenuItem> menuItems = OpidioApplication.getInstance().getMenuItems();
         for (io.opid.opidio.menu.MenuItem menuItem : menuItems.values()) {
             names.add(menuItem.getName());
         }
