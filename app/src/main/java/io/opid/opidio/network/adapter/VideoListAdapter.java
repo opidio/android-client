@@ -58,7 +58,7 @@ public class VideoListAdapter extends PaginatedListAdapter<Video, Videos> {
 
     @Override
     protected int loadNext() {
-        return 7;
+        return 2;
     }
 
     /**
