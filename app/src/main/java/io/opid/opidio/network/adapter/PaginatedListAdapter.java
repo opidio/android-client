@@ -159,7 +159,7 @@ public abstract class PaginatedListAdapter<TSingle, TContainer> extends BaseAdap
     }
 
     private boolean closeToEnd(int position) {
-        return position + loadNext() > getCount();
+        return position + loadNext() >= getCount();
     }
 
     /**
