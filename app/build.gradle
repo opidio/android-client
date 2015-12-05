@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.1'
+        classpath 'com.android.tools.build:gradle:2.0.0-alpha1'
         classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:latest.integration'
     }
 }
@@ -17,7 +17,7 @@ repositories {
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion '23.0.2'
 
     defaultConfig {
         applicationId "io.opid.opidio"
